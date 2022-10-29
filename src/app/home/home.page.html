@@ -12,6 +12,11 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-row>
+    <ion-input placeholder="Publica algo"></ion-input>
+    <ion-button expand="full" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
+  </ion-row>
+  
   <ion-col>
     
         <ion-card *ngFor="let post of posts">
@@ -30,7 +35,7 @@
                   </ng-container>
                 </ion-slides>
             </ion-col>
-            
+            <ion-button class="ion-margin-bottom ion-float-right"><ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>Comentarios</ion-button>
           </ion-card-content>
         </ion-card>
         
