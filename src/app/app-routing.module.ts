@@ -8,9 +8,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./landpage/landpage.module').then( m => m.LandpagePageModule),
-    
-
+    loadChildren: () => import('./landpage/landpage.module').then( m => m.LandpagePageModule)
   },
   {
     path: 'login',

@@ -4,6 +4,10 @@ import { HomePage } from '../home/home.page';
 import { LoginPage } from '../login/login.page';
 import { RegisterClientPage } from '../register-client/register-client.page';
 import { RegisterRestPage } from '../register-rest/register-rest.page';
+import { canActivate, redirectUnauthorizedTo,redirectLoggedInTo, AuthGuard} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 import { LandpagePage } from './landpage.page';
 
@@ -18,17 +22,20 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginPage
+    component: LoginPage,
+    ...canActivate(redirectLoggedInToHome)
   }
   ,
   {
     path: 'register-client',
-    component: RegisterClientPage
+    component: RegisterClientPage,
+    ...canActivate(redirectLoggedInToHome)
   }
   ,
   {
     path: 'register-res',
-    component: RegisterRestPage
+    component: RegisterRestPage,
+    ...canActivate(redirectLoggedInToHome)
   }
 ];
 

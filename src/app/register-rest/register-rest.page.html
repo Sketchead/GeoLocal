@@ -9,10 +9,11 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
+    <form [formGroup]="credentials" (ngSubmit)="register()">
     <div class="formulario">
       <div class="campo">
         <label>CORREO</label>
-        <input type="text" id="correo" name="email">
+        <input type="text" id="correo" formControlName="email">
       </div>
       <div class="campo">
         <label>NOMBRE(S)</label>
@@ -28,13 +29,14 @@
       </div>
       <div class="campo">
         <label>CONTRASEÑA</label>
-        <input type="password" class="password" name="password">
+        <input type="password" class="password" formControlName="password">
       </div>
       <div class="campo">
         <label>REPITE CONTRASEÑA</label>
-        <input type="password" class="password" name="password">
+        <input type="password" class="password" name="Rpassword">
       </div>
       <button id="botonRegistro" type="submit">REGISTRARSE</button>
     </div>
+  </form>
   </div>
 </ion-content>
