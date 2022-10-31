@@ -1,0 +1,82 @@
+#container {
+    text-align: center;
+    position: relative;
+    height: 100vh;
+  }
+  
+  #container::before{
+    content: "";
+    background: url(/assets/images/fondoInicio.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.75;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1; 
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  #botones{
+    display: block;
+    margin-top: 100px;
+  }
+  #botonInvitado{
+    margin: 20px;
+    width: 70%;
+    border-radius: 20px;
+    font-size: 25px;
+    color: black;
+    background-color: #FFFF;
+    border: 2px solid #EA7622;
+    font-weight: bolder;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  
+  #botonLogin{
+    margin: 20px;
+    width: 70%;
+    border-radius: 20px;
+    font-size: 25px;
+    color: black;
+    background-color: #FFFF;
+    border: 2px solid #EA7622;
+    font-weight: bolder;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  
+  #botonRegistro{
+    margin: 20px;
+    width: 70%;
+    border-radius: 20px;
+    font-size: 25px;
+    color: #FFFF;
+    background-color: #EA7622;
+    font-weight: bolder;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  
