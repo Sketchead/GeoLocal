@@ -9,32 +9,34 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <div class="formulario">
-      <div class="campo">
-        <label>CORREO</label>
-        <input type="text" id="correo" name="email">
+    <form [formGroup]="credentials" (ngSubmit)="register()">
+      <div class="formulario">
+        <div class="campo">
+          <label>CORREO</label>
+          <input type="text" id="correo" formControlName="email">
+        </div>
+        <div class="campo">
+          <label>NOMBRE(S)</label>
+          <input type="text" id="nombre" name="name">
+        </div>
+        <div class="campo">
+          <label>APELLIDO PATERNO</label>
+          <input type="text" id="aPaterno" name="aPaterno">
+        </div>
+        <div class="campo">
+          <label>APELLIDO MATERNO</label>
+          <input type="text" id="aMaterno" name="aMaterno">
+        </div>
+        <div class="campo">
+          <label>CONTRASEÑA</label>
+          <input type="password" class="password" formControlName="password">
+        </div>
+        <div class="campo">
+          <label>REPITE CONTRASEÑA</label>
+          <input type="password" class="password" name="Rpassword">
+        </div>
+        <button id="botonRegistro" type="submit">REGISTRARSE</button>
       </div>
-      <div class="campo">
-        <label>NOMBRE(S)</label>
-        <input type="text" id="nombre" name="name">
-      </div>
-      <div class="campo">
-        <label>APELLIDO PATERNO</label>
-        <input type="text" id="aPaterno" name="aPaterno">
-      </div>
-      <div class="campo">
-        <label>APELLIDO MATERNO</label>
-        <input type="text" id="aMaterno" name="aMaterno">
-      </div>
-      <div class="campo">
-        <label>CONTRASEÑA</label>
-        <input type="password" id="password" name="password">
-      </div>
-      <div class="campo">
-        <label>REPITE CONTRASEÑA</label>
-        <input type="password" id="password" name="password">
-      </div>
-      <button id="botonRegistro" type="submit">REGISTRARSE</button>
-    </div>
+    </form>
   </div>
 </ion-content>

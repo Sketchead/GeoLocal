@@ -1,22 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectUnauthorizedTo,redirectLoggedInTo, AuthGuard} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./landpage/landpage.module').then( m => m.LandpagePageModule)
+    loadChildren: () => import('./landpage/landpage.module').then( m => m.LandpagePageModule),
+    
+
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register-client',
-    loadChildren: () => import('./register-client/register-client.module').then( m => m.RegisterClientPageModule)
+    loadChildren: () => import('./register-client/register-client.module').then( m => m.RegisterClientPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register-rest',
-    loadChildren: () => import('./register-rest/register-rest.module').then( m => m.RegisterRestPageModule)
+    loadChildren: () => import('./register-rest/register-rest.module').then( m => m.RegisterRestPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'home',
