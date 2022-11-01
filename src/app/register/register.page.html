@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+  </ion-header>
+  
+  <div id="container">
+    <div id="logo">
+      <ion-img src="/assets/images/Logo.png"></ion-img>
+    </div>
+    <form [formGroup]="credentials" (ngSubmit)="register()">
+      <div class="formulario">
+        <div class="campo">
+          <label>CORREO</label>
+          <input type="text" id="correo" formControlName="email">
+        </div>
+        <div class="campo">
+          <label>CONTRASEÑA</label>
+          <input type="password" class="password" id="password" formControlName="password">
+        </div>
+        <div class="campo">
+          <label>CONFIRMAR CONTRASEÑA</label>
+          <input type="password" class="password"  id="confirm_password" name="Rpassword">
+        </div>
+        <button id="botonRegistro" type="submit">REGISTRARSE</button>
+      </div>
+    </form>
+    <hr>Ó<hr>
+    <button id="botonFacebook" type="button">REGISTRARSE CON FACEBOOK</button>
+    <button id="botonGoogle" type="button">REGISTRARSE CON GOOGLE</button>
+  </div>
+</ion-content>

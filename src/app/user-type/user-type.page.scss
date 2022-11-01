@@ -3,7 +3,6 @@
     position: relative;
     height: 100vh;
   }
-  
   #container::before{
     content: "";
     background: url(/assets/images/fondoInicio.jpg);
@@ -11,7 +10,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.75;
+    opacity: 0.3;
     position: absolute;
     top: 0px;
     right: 0px;
@@ -37,26 +36,28 @@
   #container a {
     text-decoration: none;
   }
-  
-  #botones{
+
+  #logo{
     display: block;
-    margin-top: 100px;
-  }
-  #botonInvitado{
-    margin: 20px;
-    width: 70%;
-    border-radius: 20px;
-    font-size: 20px;
-    color: black;
-    background-color: #FFFF;
-    border: 2px solid #EA7622;
-    font-weight: bold;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
   }
   
+  .formulario{
+    display: block;
+    position: relative;
+  }
+
+  .formulario .campo label{
+    width: 80%;
+    color: #EA7622;
+    font-weight: bold;
+    font-size: 25px;
+  }
   #botonLogin{
     margin: 20px;
+    margin-top: 50px;
     width: 70%;
     border-radius: 20px;
     font-size: 20px;
@@ -79,4 +80,5 @@
     padding-top: 12px;
     padding-bottom: 12px;
   }
+
   

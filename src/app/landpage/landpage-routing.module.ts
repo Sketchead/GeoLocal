@@ -10,6 +10,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 import { LandpagePage } from './landpage.page';
+import { RegisterPage } from '../register/register.page';
 
 const routes: Routes = [
   {
@@ -24,7 +25,12 @@ const routes: Routes = [
     path: 'login',
     component: LoginPage,
     ...canActivate(redirectLoggedInToHome)
-  }
+  },
+  {
+    path: 'register',
+    component: RegisterPage,
+   // ...canActivate(redirectLoggedInToHome)
+  }/*
   ,
   {
     path: 'register-client',
@@ -36,7 +42,7 @@ const routes: Routes = [
     path: 'register-res',
     component: RegisterRestPage,
     ...canActivate(redirectLoggedInToHome)
-  }
+  }*/
 ];
 
 @NgModule({
