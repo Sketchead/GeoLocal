@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+  </ion-header>
+  
+  <div id="container">
+    <div id="logo">
+      <ion-img src="/assets/images/Logo.png"></ion-img>
+    </div>
+    <form (ngSubmit)="register()">
+      <div class="formulario">
+        <div class="campo">
+          <label>CORREO</label>
+          <input >
+        </div>
+        <div class="campo">
+          <label>CONTRASEÑA</label>
+          <input >
+        </div>
+        <button id="botonIngresar" type="submit" >INGRESAR</button>
+      </div>
+    </form>
+  </div>
 </ion-content>
