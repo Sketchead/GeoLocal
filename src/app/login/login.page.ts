@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   }
 
   register(){
-      this.router.navigateByUrl('/home',{replaceUrl:true});
+      this.router.navigateByUrl('/app/home',{replaceUrl:true});
   }
 
 }

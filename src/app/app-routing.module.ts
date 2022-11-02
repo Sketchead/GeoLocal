@@ -13,30 +13,22 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-   // ...canActivate(redirectLoggedInToHome)
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register-client',
     loadChildren: () => import('./register-client/register-client.module').then( m => m.RegisterClientPageModule),
-   // ...canActivate(redirectLoggedInToHome)
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register-rest',
     loadChildren: () => import('./register-rest/register-rest.module').then( m => m.RegisterRestPageModule),
-   // ...canActivate(redirectLoggedInToHome)
+    ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: 'home',
+    path: 'app',
     loadChildren: () => import('./tablinks/tablinks.module').then(m => m.TablinksPageModule)
-   },
-  {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'user-type',
-    loadChildren: () => import('./user-type/user-type.module').then( m => m.UserTypePageModule)
-  }
+   }
 
 ];
 @NgModule({

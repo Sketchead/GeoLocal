@@ -47,7 +47,7 @@ export class RegisterClientPage implements OnInit {
       }
       await this.clientService.createClient(this.client)
       await loading.dismiss();
-      this.router.navigateByUrl('/home',{replaceUrl:true});     
+      this.router.navigateByUrl('/app/home',{replaceUrl:true});     
     }
     async showAlert(header,message) {
       const alert = await this.alertController.create({

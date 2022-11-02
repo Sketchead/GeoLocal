@@ -1,20 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      GeoLocal
-    </ion-title>
+    <ion-row>
+      <ion-img id="headerLogo" src="/assets/images/logoHeader.png" size="xs"></ion-img>
+      <ion-label id="headerTitle" align-self-end>GeoLocal</ion-label>  
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
   </ion-header>
   <ion-row>
     <ion-input placeholder="Publica algo"></ion-input>
-    <ion-button expand="full" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
+    <ion-button color="success" fill="clear" expand="full" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
   </ion-row>
   
   <ion-col>
