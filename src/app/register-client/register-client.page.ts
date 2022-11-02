@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Client } from '../models/client';
 import { ClientService } from '../services/client.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,LoadingController } from '@ionic/angular';
 
 
 
@@ -25,13 +25,17 @@ export class RegisterClientPage implements OnInit {
     private clientService :ClientService,
     private auth:Auth, 
     private alertController: AlertController,
+    private loadingController:LoadingController,
     private router:Router) { }
     
     ngOnInit() {
       
     }
     
-    addclient(){
+    async addclient(){
+      const loading = await this.loadingController.create();
+      await loading.present();
+
       this.client={
        user:this.auth.currentUser.uid,
        email: this.auth.currentUser.email,
@@ -41,8 +45,9 @@ export class RegisterClientPage implements OnInit {
        secondLastname:this.secondLastname,
        type:"client"
       }
-        this.clientService.createClient(this.client)
-        this.router.navigateByUrl('/home',{replaceUrl:true});     
+      await this.clientService.createClient(this.client)
+      await loading.dismiss();
+      this.router.navigateByUrl('/home',{replaceUrl:true});     
     }
     async showAlert(header,message) {
       const alert = await this.alertController.create({

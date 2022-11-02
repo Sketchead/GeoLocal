@@ -22,13 +22,17 @@ export class RegisterRestPage implements OnInit {
     private restaurantService:RestaurantService,
     private auth:Auth, 
     private alertController: AlertController,
+    private loadingController:LoadingController,
     private router:Router) { }
     
     ngOnInit() {
       
     }
     
-    addres(){
+    async addres(){
+      const loading = await this.loadingController.create();
+      await loading.present();
+
       this.rest={
        user:this.auth.currentUser.uid,
        email: this.auth.currentUser.email,
@@ -38,7 +42,8 @@ export class RegisterRestPage implements OnInit {
        longitude:" -104.895",
        type:"restaurant"
       }
-        this.restaurantService.createRes(this.rest)
+        await this.restaurantService.createRes(this.rest)
+        await loading.dismiss();
         this.router.navigateByUrl('/home',{replaceUrl:true});     
     }
     async showAlert(header,message) {

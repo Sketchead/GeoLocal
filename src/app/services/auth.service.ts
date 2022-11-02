@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  getAuth,Auth } from '@angular/fire/auth';
-import { GoogleAuthProvider,signInWithRedirect } from "firebase/auth"
+import { GoogleAuthProvider,signInWithRedirect,FacebookAuthProvider } from "firebase/auth"
 
 import { createUserWithEmailAndPassword, signOut } from '@firebase/auth';
 
@@ -24,6 +24,16 @@ export class AuthService {
     try{
       const auth = getAuth();
       const provider = new GoogleAuthProvider
+      await signInWithRedirect(auth, provider);
+    }catch(e){
+      return null
+    }
+  }
+
+  async facebookregister(){
+    try{
+      const auth = getAuth();
+      const provider = new FacebookAuthProvider();
       await signInWithRedirect(auth, provider);
     }catch(e){
       return null

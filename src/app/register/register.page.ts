@@ -81,6 +81,28 @@ export class RegisterPage implements OnInit {
         
       }
       //------------------------FACEBOOK----------------------
+      async facebookRegister(){
+        const loading = await this.loadingController.create();
+        await loading.present();
+
+        const petition = new Promise((resolve,reject)=>{
+          const user = this.authService.facebookregister()
+          console.log(user)
+          if(user){
+            resolve('exito')
+          }else{
+            reject('fallo')
+          }
+        });
+
+        await loading.dismiss();
+
+        petition.then((message)=>{ 
+        }).catch((message)=>{
+          this.showAlert('Fallo registro',message)
+        })
+        await this.router.navigateByUrl('/user-type',{replaceUrl:true});
+      }
       async showAlert(header,message) {
         const alert = await this.alertController.create({
           header,
