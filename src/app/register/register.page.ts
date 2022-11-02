@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
     ngOnInit() {
       this.credentials = this.fb.group({
         email:['',[Validators.required,Validators.email]],
-        password:['',[Validators.required,Validators.minLength(6)]]})
+        password:['',[Validators.required]]})
       }
       //------------------------EMAIL&&PASSWORD----------------------
       async register(){

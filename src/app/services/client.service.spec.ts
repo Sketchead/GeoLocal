@@ -1,16 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
+import { Firestore ,collectionData, collection, addDoc} from '@angular/fire/firestore';
 
-import { ClientService } from './client.service';
+@Injectable({
+  providedIn: 'root'
+})
+export class ClientService {
 
-describe('ClientService', () => {
-  let service: ClientService;
+  constructor(private firestore:Firestore) { }
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ClientService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  createClient(client){
+    const clientRef = collection(this.firestore,'users')
+    return addDoc(clientRef,client)
+  }

@@ -3,7 +3,7 @@ import { canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
 import { RegisterPage } from './register.page';
 
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home'])
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/app/home'])
 const routes: Routes = [
   {
     path: '',

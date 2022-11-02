@@ -18,12 +18,19 @@ const routes: Routes = [
   {
     path: 'register-client',
     loadChildren: () => import('./register-client/register-client.module').then( m => m.RegisterClientPageModule),
-    ...canActivate(redirectLoggedInToHome)
+    //...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register-rest',
     loadChildren: () => import('./register-rest/register-rest.module').then( m => m.RegisterRestPageModule),
-    ...canActivate(redirectLoggedInToHome)
+    //...canActivate(redirectLoggedInToHome)
+  },{
+    path: 'user-type',
+    loadChildren: () => import('./user-type/user-type.module').then( m => m.UserTypePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'app',
