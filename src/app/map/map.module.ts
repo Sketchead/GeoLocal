@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { MapPageRoutingModule } from './map-routing.module';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MapPage } from './map.page';
 
 @NgModule({
@@ -13,8 +13,9 @@ import { MapPage } from './map.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MapPageRoutingModule
+    MapPageRoutingModule,
   ],
-  declarations: [MapPage]
+  declarations: [MapPage],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MapPageModule {}

@@ -1,9 +1,14 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>map</ion-title>
+    <ion-row>
+      <ion-img id="headerLogo" src="/assets/images/logoHeader.png" size="xs"></ion-img>
+      <ion-label id="headerTitle" align-self-end>GeoLocal</ion-label>  
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="container">
+    <capacitor-google-map id="mapContainer"#map></capacitor-google-map>
+  </div>
 </ion-content>
