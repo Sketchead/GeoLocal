@@ -5,7 +5,8 @@ import { LoginPage } from '../login/login.page';
 import { canActivate, redirectUnauthorizedTo,redirectLoggedInTo, AuthGuard} from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/app/home']);
+const redirectLoggedIntoSetup = () =>redirectLoggedInTo(['user-type']);
 
 import { LandpagePage } from './landpage.page';
 import { RegisterPage } from '../register/register.page';
@@ -13,34 +14,26 @@ import { RegisterPage } from '../register/register.page';
 const routes: Routes = [
   {
     path: '',
-    component: LandpagePage
+    component: LandpagePage,
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'home',
-    component: HomePage
+    component: HomePage,
+    //...canActivate(redirectLoggedIntoSetup)
   },
   {
     path: 'login',
     component: LoginPage,
+    //...canActivate(redirectLoggedIntoSetup),
     ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'register',
     component: RegisterPage,
-    ...canActivate(redirectLoggedInToHome)
-  }/*
-  ,
-  {
-    path: 'register-client',
-    component: RegisterClientPage,
+    //...canActivate(redirectLoggedIntoSetup),
     ...canActivate(redirectLoggedInToHome)
   }
-  ,
-  {
-    path: 'register-res',
-    component: RegisterRestPage,
-    ...canActivate(redirectLoggedInToHome)
-  }*/
 ];
 
 @NgModule({

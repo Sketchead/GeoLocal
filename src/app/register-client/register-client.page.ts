@@ -5,6 +5,8 @@ import { Client } from '../models/client';
 import { ClientService } from '../services/client.service';
 import { Router } from '@angular/router';
 import { AlertController,LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
+
 
 
 
@@ -23,7 +25,8 @@ export class RegisterClientPage implements OnInit {
   
   constructor(
     private clientService :ClientService,
-    private auth:Auth, 
+    private auth:Auth,
+    private a:AuthService, 
     private alertController: AlertController,
     private loadingController:LoadingController,
     private router:Router) { }
@@ -47,7 +50,7 @@ export class RegisterClientPage implements OnInit {
       }
       await this.clientService.createClient(this.client)
       await loading.dismiss();
-      this.router.navigateByUrl('/app/home',{replaceUrl:true});     
+      this.router.navigateByUrl('/app/home',{replaceUrl:true}); 
     }
     async showAlert(header,message) {
       const alert = await this.alertController.create({
