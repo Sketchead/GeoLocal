@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Client } from '../models/client';
+import { ClientService } from '../services/client.service';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-register-client',
@@ -11,29 +15,42 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterClientPage implements OnInit {
   credentials: FormGroup;
+  client : Client;
+  name:string;
+  username:string;
+  firstLastname:string;
+  secondLastname:string;
   
   constructor(
-    private fb: FormBuilder, 
-    private router:Router,
+    private clientService :ClientService,
+    private auth:Auth, 
     private alertController: AlertController,
-    private authService:AuthService,
-    private loadingController:LoadingController) { }
-    
-
+    private router:Router) { }
     
     ngOnInit() {
-      this.credentials = this.fb.group({
-        })
-      }
       
-
-      async showAlert(header,message) {
-        const alert = await this.alertController.create({
-          header,
-          message,
-          buttons:['OK'],
-        });
-        await alert.present();
-      }
     }
     
+    addclient(){
+      this.client={
+       user:this.auth.currentUser.uid,
+       email: this.auth.currentUser.email,
+       name:this.name,
+       username:this.username,
+       firstLastname:this.firstLastname,
+       secondLastname:this.secondLastname,
+       type:"client"
+      }
+        this.clientService.createClient(this.client)
+        this.router.navigateByUrl('/home',{replaceUrl:true});     
+    }
+    async showAlert(header,message) {
+      const alert = await this.alertController.create({
+        header,
+        message,
+        buttons:['OK'],
+      });
+      await alert.present();
+    }
+  }
+  

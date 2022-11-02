@@ -9,25 +9,25 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form [formGroup]="credentials" (ngSubmit)="confirmData()">
+    <form>
       <div class="formulario">
         <div class="campo">
           <label>NOMBRE(S)</label>
-          <input type="text" id="nombre" name="name">
+          <input type="text" id="nombre" name="name" [(ngModel)]="name">
         </div>
         <div class="campo">
           <label>NOMBRE USUARIO</label>
-          <input type="text" id="username" name="username">
+          <input type="text" id="username" name="username" [(ngModel)]="username">
         </div>
         <div class="campo">
           <label>APELLIDO PATERNO</label>
-          <input type="text" id="aPaterno" name="aPaterno">
+          <input type="text" id="pLastname" name="pLastname" [(ngModel)]="firstLastname">
         </div>
         <div class="campo">
           <label>APELLIDO MATERNO</label>
-          <input type="text" id="aMaterno" name="aMaterno">
+          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname">
         </div>
-        <button id="botonRegistro" type="submit">REGISTRARSE</button>
+        <button id="botonRegistro" type="button" (click)="addclient()">REGISTRARSE</button>
       </div>
     </form>
   </div>
