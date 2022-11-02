@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-register-rest',
@@ -11,27 +13,40 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterRestPage implements OnInit {
   credentials: FormGroup;
+  rest : Restaurant;
+  name:string;
+  resname:string;
+  
   
   constructor(
-    private fb: FormBuilder, 
-    private router:Router,
+    private restaurantService:RestaurantService,
+    private auth:Auth, 
     private alertController: AlertController,
-    private loadingController:LoadingController) { }
-    
+    private router:Router) { }
     
     ngOnInit() {
-      this.credentials = this.fb.group({
-        })
-      }
       
-
-      async showAlert(header,message) {
-        const alert = await this.alertController.create({
-          header,
-          message,
-          buttons:['OK'],
-        });
-        await alert.present();
+    }
+    
+    addres(){
+      this.rest={
+       user:this.auth.currentUser.uid,
+       email: this.auth.currentUser.email,
+       name:this.name,
+       resname:this.resname,
+       latitude:"21.5039",
+       longitude:" -104.895",
+       type:"restaurant"
       }
-
+        this.restaurantService.createRes(this.rest)
+        this.router.navigateByUrl('/home',{replaceUrl:true});     
+    }
+    async showAlert(header,message) {
+      const alert = await this.alertController.create({
+        header,
+        message,
+        buttons:['OK'],
+      });
+      await alert.present();
+    }
 }

@@ -6,7 +6,7 @@ import { Firestore ,collectionData, collection, addDoc} from '@angular/fire/fire
 })
 export class ClientService {
 
-  constructor(private firestore:Firestore,) { }
+  constructor(private firestore:Firestore) { }
 
   createClient(client){
     const clientRef = collection(this.firestore,'users')
