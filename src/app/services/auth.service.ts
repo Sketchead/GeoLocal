@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import {  getAuth,Auth } from '@angular/fire/auth';
+import { GoogleAuthProvider,signInWithRedirect } from "firebase/auth"
+
 import { createUserWithEmailAndPassword, signOut } from '@firebase/auth';
 
 @Injectable({
@@ -15,6 +17,16 @@ export class AuthService {
       const user = await createUserWithEmailAndPassword(this.auth,email,password);
     }catch(e){
       return null;
+    }
+  }
+
+  async googleregister(){
+    try{
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider
+      await signInWithRedirect(auth, provider);
+    }catch(e){
+      return null
     }
   }
 

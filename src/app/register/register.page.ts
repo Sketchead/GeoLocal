@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -17,7 +18,8 @@ export class RegisterPage implements OnInit {
     private router:Router,
     private alertController: AlertController,
     private authService:AuthService,
-    private loadingController:LoadingController) { }
+    private loadingController:LoadingController,
+    ) { }
     
     get email(){
       return this.credentials.get('email');
@@ -32,6 +34,7 @@ export class RegisterPage implements OnInit {
         email:['',[Validators.required,Validators.email]],
         password:['',[Validators.required,Validators.minLength(6)]]})
       }
+      //------------------------EMAIL&&PASSWORD----------------------
       async register(){
         const loading = await this.loadingController.create();
         await loading.present();
@@ -47,13 +50,37 @@ export class RegisterPage implements OnInit {
         
         await loading.dismiss();
         
-        petition.then((message)=>{
+        petition.then((message)=>{ 
           this.router.navigateByUrl('/user-type',{replaceUrl:true});
         }).catch((message)=>{
           this.showAlert('Fallo registro','No se pudo realizar el registro')
         })
       }
+      //------------------------GOOGLE----------------------
+      async googleRegister(){
+        const loading = await this.loadingController.create();
+        await loading.present();
 
+        const petition = new Promise((resolve,reject)=>{
+          const user = this.authService.googleregister()
+          console.log(user)
+          if(user){
+            resolve('exito')
+          }else{
+            reject('fallo')
+          }
+        });
+
+        await loading.dismiss();
+
+        petition.then((message)=>{ 
+          this.router.navigateByUrl('/user-type',{replaceUrl:true});
+        }).catch((message)=>{
+          this.showAlert('Fallo registro',message)
+        })
+        
+      }
+      //------------------------FACEBOOK----------------------
       async showAlert(header,message) {
         const alert = await this.alertController.create({
           header,
