@@ -35,7 +35,12 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./tablinks/tablinks.module').then(m => m.TablinksPageModule),
-   }
+   },
+  {
+    path: 'publicidad',
+    loadChildren: () => import('./publicidad/publicidad.module').then( m => m.PublicidadPageModule)
+  }
+
 
 ];
 @NgModule({
