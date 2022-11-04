@@ -1,9 +1,52 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>publicidad</ion-title>
+    <ion-title>Publicación</ion-title>
   </ion-toolbar>
+  
 </ion-header>
 
-<ion-content>
 
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+  </ion-header>
+  
+  <div id="container">
+    <div id="logo">
+      <ion-img src="/assets/images/Logo.png"></ion-img>
+    </div>
+    <div class="container">
+      <section id="Images" class="images-cards">
+          <form action="upload.php" method="post" enctype="multipart/form-data">
+              <div class="row">
+                  <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
+                      <div class="add-new-photo first" id="add-photo">
+                          <span><i class="icon-camera"></i></span>
+                      </div>
+                      <input type="file" multiple id="add-new-photo" name="images[]" >
+                  </div>
+              </div>
+          </form> 
+      </section>
+  </div>
+  <form>
+    <div class="formulario">
+      <div class="campo">
+        <label>Nombre restaurant</label>
+        <input required>
+      </div>
+      <div class="campo">
+        <label>Descripción</label>
+        <textarea required></textarea>
+      </div>
+      <button id="botonPublicar" type="submit">PUBLICAR</button>
+    </div>
+  </form>
+  </div>
+
+  
 </ion-content>
+
+
+
+
+
