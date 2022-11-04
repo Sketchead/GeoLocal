@@ -16,7 +16,7 @@ export class HomePage {
       console.log(res);
       this.posts = res;
     })
-    //this.userLogged=this.auth.currentUser.uid;
+    this.userLogged=this.auth.currentUser.uid;
   }
 
   seePost(id: string){

@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData, docData, doc, addDoc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { notEqual } from 'assert';
 import { Observable } from 'rxjs';
+import { Photo } from '@capacitor/camera'
+import { Auth } from '@angular/fire/auth';
+import { ref,Storage } from '@angular/fire/storage';
+import { getDownloadURL, uploadString } from '@firebase/storage';
+import { setDoc } from '@firebase/firestore';
 
 export interface Post{
   author?: string;
@@ -17,7 +22,7 @@ export interface Post{
 })
 export class DataService {
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private auth:Auth, private storage: Storage) { }
   
   getPosts(): Observable<Post[]>{
     const postsRef = collection(this.firestore,'posts');
@@ -40,6 +45,11 @@ export class DataService {
 
   addPost(post: Post){
     const postRef = collection(this.firestore,'posts');
+    /* PARA INSERTAR Y RECUPERAR ID, SE CAMBIARÍA RETURN DEL MÉTODO 
+    addDoc(postRef, post).then(documentId => {
+      console.log(documentId.id);
+      return documentId.id;
+    }); */
     return addDoc(postRef, post);
   }
 
@@ -55,5 +65,50 @@ export class DataService {
       text: post.text,
       positive: post.positive,
       images: post.images})
+  }
+
+  async uploadPhoto(cameraFile: Photo){
+    let images: string[] 
+    const user = this.auth.currentUser;
+    const pId = 'bvSZeSKsuk6Ea95M6ytv';
+    //Agregar id de doc
+    const path = `uploads/${user.uid}/photo.png`;
+    const storageRef = ref(this.storage,path);
+
+    try{
+      await uploadString(storageRef, cameraFile.base64String, 'base64');
+      const imageURL = await getDownloadURL(storageRef)
+      images = [imageURL]
+      const postDocRef = doc(this.firestore,`posts/${pId}`)
+      await setDoc(postDocRef,{
+         images
+      })
+      return true;
+    }catch(e){
+      console.log(e);
+      return null;
+    }
+  }
+  
+  //Para recuperar array de url de imagenes
+  async getImagesArray(cameraFile: Photo): Promise<string[]>{
+    let images: string[] 
+    const user = this.auth.currentUser;
+    const pId = 'bvSZeSKsuk6Ea95M6ytv';
+    //Agregar id de doc
+
+    const path = `uploads/${user.uid}/photo.png`;
+    const storageRef = ref(this.storage,path);
+
+    try{
+      await uploadString(storageRef, cameraFile.base64String, 'base64');
+      const imageURL = await getDownloadURL(storageRef)
+      images = [imageURL]
+      
+      return images;
+    }catch(e){
+      console.log(e);
+      return null;
+    }
   }
 }

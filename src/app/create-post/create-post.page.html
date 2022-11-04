@@ -28,10 +28,9 @@
             <ion-select-option [value]="false">Negativa</ion-select-option>
           </ion-select>
         </div>
-       <!--  <div class="campo">
-          <label>Fotos</label>
-          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname"required>
-        </div> -->
+        <div class="campo">
+            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
+        </div>
         <button id="botonRegistro" type="submit" (click)="addPost()">PUBLICAR</button>
       </div>
     </form>
