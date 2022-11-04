@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Publicación</ion-title>
   </ion-toolbar>
-  
+
 </ion-header>
 
 
@@ -31,14 +31,14 @@
   <form>
     <div class="formulario">
       <div class="campo">
-        <label>Nombre restaurant</label>
+        <label>Titulo</label>
         <input required>
       </div>
       <div class="campo">
         <label>Descripción</label>
         <textarea required></textarea>
       </div>
-      <button id="botonPublicar" type="submit">PUBLICAR</button>
+      <button id="botonPublicar" type="submit" (click)="addres()">PUBLICAR</button>
     </div>
   </form>
   </div>
