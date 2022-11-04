@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -8,11 +9,22 @@ import { DataService } from '../services/data.service';
 })
 export class HomePage {
   posts = [];
-  constructor(private dataService: DataService) {
+  constructor(private router: Router,private dataService: DataService) {
     this.dataService.getPosts().subscribe(res=>{
       console.log(res);
       this.posts = res;
     })
+  }
+
+  seePost(id: string){
+    this.router.navigate(['/view-post'], {
+      queryParams: { id: id  },
+    });
+  }
+
+  createPost(){
+    console.log("click");
+    this.router.navigate(['/create-post']);
   }
 
 }

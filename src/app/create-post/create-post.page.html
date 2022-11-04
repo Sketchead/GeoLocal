@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>create-Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+  </ion-header>
+  
+  <div id="container">
+    <div id="logo">
+      <ion-img src="/assets/images/Logo.png"></ion-img>
+    </div>
+    <form>
+      <div class="formulario">
+        <div class="campo">
+          <label>TÍTULO</label>
+          <input type="text" id="title" name="title" [(ngModel)]="title" required>
+        </div>
+        <div class="campo">
+          <label>RESEÑA</label>
+          <input type="text" id="text" name="text" [(ngModel)]="text" required>
+        </div>
+        <div class="campo">
+          <ion-select placeholder="CALIFICACIÓN" id="positive" name="positive" [(ngModel)]="positive" required>
+            <ion-select-option [value]="true">Positiva</ion-select-option>
+            <ion-select-option [value]="false">Negativa</ion-select-option>
+          </ion-select>
+        </div>
+       <!--  <div class="campo">
+          <label>Fotos</label>
+          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname"required>
+        </div> -->
+        <button id="botonRegistro" type="submit" (click)="addPost()">PUBLICAR</button>
+      </div>
+    </form>
+  </div>
+</ion-content>

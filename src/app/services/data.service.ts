@@ -4,10 +4,12 @@ import { notEqual } from 'assert';
 import { Observable } from 'rxjs';
 
 export interface Post{
+  author?: string;
   id?: string;
   title: string;
   text: string;
   positive: boolean;
+  pos?: number[];
   images?: string[];
 }
 @Injectable({
@@ -19,12 +21,21 @@ export class DataService {
   
   getPosts(): Observable<Post[]>{
     const postsRef = collection(this.firestore,'posts');
-    return collectionData(postsRef, { idField: 'postId'}) as Observable<Post[]>;
+    return collectionData(postsRef, { idField: 'id'}) as Observable<Post[]>;
   }
 
-  getPostsById(id): Observable<Post>{
-    const postsDocRef = doc(this.firestore,'posts/${id}');
-    return docData(postsDocRef, { idField: 'postId'}) as Observable<Post>;
+  getPostById(id: string): Post{
+    let pst: Post;
+    const postsDocRef = doc(this.firestore, `posts/${id}`);
+    let p  = docData(postsDocRef, { idField: 'id'}) as unknown as Post
+    pst.author = p.author
+    pst.id = p.id
+    pst.images = p.images
+    pst.pos = p.pos
+    pst.positive = p.positive
+    pst.text = p.text
+    pst.title = p.title
+    return pst;
   }
 
   addPost(post: Post){
@@ -33,12 +44,12 @@ export class DataService {
   }
 
   deletePost(post: Post){
-    const postRef = doc(this.firestore,'posts/${post.id}');
+    const postRef = doc(this.firestore,`posts/${post.id}`);
     return deleteDoc(postRef);
   }
 
   updatePost(post: Post){
-    const postsDocRef = doc(this.firestore,'posts/${post.id}');
+    const postsDocRef = doc(this.firestore,`posts/${post.id}`);
     return updateDoc(postsDocRef, {
       title: post.title,
       text: post.text,

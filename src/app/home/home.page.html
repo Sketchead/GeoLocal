@@ -19,7 +19,7 @@
   
   <ion-col>
     
-        <ion-card *ngFor="let post of posts">
+        <ion-card *ngFor="let post of posts" (click)="seePost(post.id)">
           <ion-card-header>
             <ion-card-title>{{ post.title }}</ion-card-title>
             <ion-card-subtitle>{{ post.text }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
@@ -42,3 +42,4 @@
 </ion-col>
 
 </ion-content>
+

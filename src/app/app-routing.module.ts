@@ -39,7 +39,16 @@ const routes: Routes = [
   {
     path: 'publicidad',
     loadChildren: () => import('./publicidad/publicidad.module').then( m => m.PublicidadPageModule)
+  },
+  {
+    path: 'view-post', //TODAVIA NO SIRVE
+    loadChildren: () => import('./view-post/view-post.module').then( m => m.ViewPostPageModule)
+  },  {
+    path: 'create-post',
+    loadChildren: () => import('./create-post/create-post.module').then( m => m.CreatePostPageModule)
   }
+
+
 
 
 ];
