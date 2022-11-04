@@ -10,8 +10,8 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
   </ion-header>
-  <ion-row>
-    <ion-input placeholder="Publica algo"></ion-input>
+  <ion-row *ngIf="userLogged">
+    <ion-input (click)="createPost()" placeholder="Publica algo"></ion-input>
     <a href="http://localhost:8100/publicidad">
       <ion-button color="success" fill="clear" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
     </a>  
