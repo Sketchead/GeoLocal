@@ -21,9 +21,10 @@ export class CreatePostPage implements OnInit {
   post: Post;
   pos:number[];
   images: string[];
+  b64imx: Photo;
   constructor(private dataservice: DataService, private router: Router, private loadingController: LoadingController,    private auth:Auth,
     private a:AuthService,private alertController: AlertController) { 
-/*       this.pos[0]=21.50951
+      /*       this.pos[0]=21.50951
       this.pos[1]=-104.89569 */
     }
 
@@ -42,9 +43,9 @@ export class CreatePostPage implements OnInit {
        positive:this.positive
       }
       
-      await this.dataservice.addPost(this.post);
+      const postedId = await this.dataservice.addPostGetId(this.post);
       await loading.dismiss();
-      this.router.navigateByUrl('/app/home',{replaceUrl:true}); 
+      this.editPostAddPhoto(postedId);
   }
 
    async choosePhoto() {
@@ -55,7 +56,8 @@ export class CreatePostPage implements OnInit {
       source: CameraSource.Photos,
     });
     console.log(image);
-    if (image){
+    this.b64imx=image
+   /*  if (image){
       const loading = await this.loadingController.create();
       await loading.present();
 
@@ -70,6 +72,26 @@ export class CreatePostPage implements OnInit {
         });
         await alert.present();
       }
+    } */
+  }
+
+  async editPostAddPhoto(postedId: string){
+    if (this.b64imx){
+      const loading = await this.loadingController.create();
+      await loading.present();
+
+      const result = await this.dataservice.uploadPhotoWId(this.b64imx,postedId);
+      loading.dismiss();
+
+      if(!result){
+        const alert = await this.alertController.create({
+          header: 'Acción fallida',
+          message: 'Hubo un problema al subir tu foto',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
     }
+    this.router.navigateByUrl('/app/home',{replaceUrl:true});  
   }
 }

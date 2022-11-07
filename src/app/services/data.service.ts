@@ -53,6 +53,16 @@ export class DataService {
     return addDoc(postRef, post);
   }
 
+  addPostGetId(post: Post){
+    const postRef = collection(this.firestore,'posts');
+    //PARA INSERTAR Y RECUPERAR ID, SE CAMBIARÍA RETURN DEL MÉTODO 
+    const pid = addDoc(postRef, post).then(documentId => {
+      console.log(documentId.id);
+      return documentId.id;
+    }); 
+    return pid;
+  }
+
   deletePost(post: Post){
     const postRef = doc(this.firestore,`posts/${post.id}`);
     return deleteDoc(postRef);
@@ -81,6 +91,29 @@ export class DataService {
       images = [imageURL]
       const postDocRef = doc(this.firestore,`posts/${pId}`)
       await setDoc(postDocRef,{
+         images
+      })
+      return true;
+    }catch(e){
+      console.log(e);
+      return null;
+    }
+  }
+
+  async uploadPhotoWId(cameraFile: Photo, docId: string){
+    let images: string[] 
+    const user = this.auth.currentUser;
+    const pId = docId;
+    //Agregar id de doc
+    const path = `uploads/${user.uid}/photo.png`;
+    const storageRef = ref(this.storage,path);
+
+    try{
+      await uploadString(storageRef, cameraFile.base64String, 'base64');
+      const imageURL = await getDownloadURL(storageRef)
+      images = [imageURL]
+      const postDocRef = doc(this.firestore,`posts/${pId}`)
+      await updateDoc(postDocRef,{
          images
       })
       return true;
