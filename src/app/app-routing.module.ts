@@ -46,6 +46,10 @@ const routes: Routes = [
   },  {
     path: 'create-post',
     loadChildren: () => import('./create-post/create-post.module').then( m => m.CreatePostPageModule)
+  },
+  {
+    path: 'datos-cliente',
+    loadChildren: () => import('./datos-cliente/datos-cliente.module').then( m => m.DatosClientePageModule)
   }
 
 
