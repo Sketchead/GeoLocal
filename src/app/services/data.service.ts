@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, docData, doc, addDoc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, docData, addDoc, deleteDoc, updateDoc,query, getDoc, doc, getFirestore } from '@angular/fire/firestore';
 import { notEqual } from 'assert';
 import { Observable } from 'rxjs';
 import { Photo } from '@capacitor/camera'
@@ -7,6 +7,8 @@ import { Auth } from '@angular/fire/auth';
 import { ref,Storage } from '@angular/fire/storage';
 import { getDownloadURL, uploadString } from '@firebase/storage';
 import { setDoc } from '@firebase/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+
 
 export interface Post{
   author?: string;
@@ -143,5 +145,16 @@ export class DataService {
       console.log(e);
       return null;
     }
+  }
+
+  async getDoc(docId){
+    const docRef = doc(this.firestore,`posts/${docId}`)
+    let dataDoc = null
+    getDoc(docRef)
+      .then((doc)=>{
+        console.log(doc.data(),doc.id)
+        dataDoc = doc.data()
+        return dataDoc
+      })
   }
 }
