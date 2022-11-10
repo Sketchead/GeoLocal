@@ -12,8 +12,19 @@
 <ion-content>
   <ion-card >
     <ion-card-header>
-          <ion-card-title>{{post.title}}</ion-card-title>
-      <ion-card-subtitle>{{post.text}} </ion-card-subtitle>
+      <div class="row">
+      <div class="column">
+        <ion-card-title>{{post.title}}</ion-card-title>
+        <ion-card-subtitle>{{post.text}} </ion-card-subtitle>
+      </div>
+      <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid" >
+        <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
+        <div class="dropdown-content">
+          <a (click)="deleteConfirmation(post)">Eliminar</a>
+          <a >Editar</a>
+        </div>
+      </div>   
+    </div>
     </ion-card-header>
   
     <ion-card-content>
