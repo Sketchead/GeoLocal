@@ -25,10 +25,11 @@ export class MapPage implements OnInit {
       element:this.mapRef.nativeElement,
       config:{
         center:{
-          lat:33.6,
-          lng:-117.9,
+          lat:21.5095,
+          lng:-104.8957,
         },
-        zoom:8,
+        zoom:14,
+        minZoom: 5
       }
     });
   }

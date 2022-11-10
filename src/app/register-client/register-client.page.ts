@@ -45,12 +45,12 @@ export class RegisterClientPage implements OnInit {
        name:this.name,
        username:this.username,
        firstLastname:this.firstLastname,
-       secondLastname:this.secondLastname,
+       secondLastname:this.secondLastname, 
        type:"client"
       }
       await this.clientService.createClient(this.client)
       await loading.dismiss();
-      this.router.navigateByUrl('/app/home',{replaceUrl:true}); 
+      await this.router.navigateByUrl('/app/home',{replaceUrl:true}); 
     }
     async showAlert(header,message) {
       const alert = await this.alertController.create({

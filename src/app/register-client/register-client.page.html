@@ -9,7 +9,7 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form (ngSubmit)="addclient()">
+    <form (ngSubmit)="addclient()" ngNativeValidate>
       <div class="formulario">
         <div class="campo">
           <label>NOMBRE(S)</label>
@@ -17,18 +17,18 @@
         </div>
         <div class="campo">
           <label>NOMBRE USUARIO</label>
-          <input type="text" id="username" name="username" [(ngModel)]="username"required>
+          <input type="text" id="username" name="username" [(ngModel)]="username" required>
         </div>
         <div class="campo">
           <label>APELLIDO PATERNO</label>
-          <input type="text" id="pLastname" name="pLastname" [(ngModel)]="firstLastname"required>
+          <input type="text" id="pLastname" name="pLastname" [(ngModel)]="firstLastname" required>
         </div>
         <div class="campo">
           <label>APELLIDO MATERNO</label>
-          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname"required>
+          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname" required>
         </div>
-        <button id="botonRegistro" type="submit" (click)="addclient()">REGISTRARSE</button>
+        <button id="botonRegistro" type="submit" >REGISTRARSE</button>
       </div>
     </form>
   </div>
-</ion-content>
+</ion-content> 
