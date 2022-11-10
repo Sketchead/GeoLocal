@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
 
 @Component({
   selector: 'app-datos-cliente',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatosClientePage implements OnInit {
 
+
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  
 
 }

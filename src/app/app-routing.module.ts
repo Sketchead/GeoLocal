@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'datos-cliente',
     loadChildren: () => import('./datos-cliente/datos-cliente.module').then( m => m.DatosClientePageModule)
+  },
+  {
+    path: 'datos-restaurant',
+    loadChildren: () => import('./datos-restaurant/datos-restaurant.module').then( m => m.DatosRestaurantPageModule)
   }
 
 
