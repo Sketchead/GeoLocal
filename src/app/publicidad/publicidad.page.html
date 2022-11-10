@@ -1,10 +1,8 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Publicación</ion-title>
+    <ion-title>Publicidad</ion-title>
   </ion-toolbar>
-
 </ion-header>
-
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -14,38 +12,24 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <div class="container">
-      <section id="Images" class="images-cards">
-          <form action="upload.php" method="post" enctype="multipart/form-data">
-              <div class="row">
-                  <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
-                      <div class="add-new-photo first" id="add-photo">
-                          <span><i class="icon-camera"></i></span>
-                      </div>
-                      <input type="file" multiple id="add-new-photo" name="images[]" >
-                  </div>
-              </div>
-          </form> 
-      </section>
-  </div>
-  <form>
-    <div class="formulario">
-      <div class="campo">
-        <label>Titulo</label>
-        <input required>
+    <form>
+      <div class="formulario">
+        <div class="campo">
+          <label>NOMBRE RESTAURANT</label>
+          <input type="text" id="title" name="title" [(ngModel)]="title" required>
+        </div>
+        <div class="campo">
+          <label>DESCRIPCIÓN</label>
+          <input type="text" id="text" name="text" [(ngModel)]="text" required>
+        </div>
+        <div class="campo">
+            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Subir Fotografia</ion-button>
+        </div>
+        <button id="botonRegistro" type="submit" (click)="addPost()">PUBLICAR</button>
       </div>
-      <div class="campo">
-        <label>Descripción</label>
-        <textarea required></textarea>
-      </div>
-      <button id="botonPublicar" type="submit" (click)="addres()">PUBLICAR</button>
-    </div>
-  </form>
+    </form>
   </div>
-
-  
 </ion-content>
-
 
 
 
