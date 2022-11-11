@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap } from '@capacitor/google-maps';
+import { LoadingController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +12,7 @@ export class MapPage implements OnInit {
   @ViewChild('map')mapRef:ElementRef;
   map: GoogleMap;
 
-  constructor() { }
+  constructor(private loadingController:LoadingController) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,8 @@ export class MapPage implements OnInit {
     this.createMap();
   }
   async createMap(){
+    const loading = await this.loadingController.create()
+      await loading.present()
     this.map = await GoogleMap.create({
       id:'map',
       apiKey:environment.mapsKey,
@@ -32,5 +35,6 @@ export class MapPage implements OnInit {
         minZoom: 5
       }
     });
+    await loading.dismiss()
   }
 }

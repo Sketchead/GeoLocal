@@ -1,17 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Firestore ,collectionData, collection, addDoc} from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+import { Firestore ,collectionData, collection, addDoc, setDoc, doc} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  constructor(private firestore:Firestore) { }
+  constructor(private firestore:Firestore,
+    private auth:Auth) { }
 
-  createRes(res){
-    const resRef = collection(this.firestore,'users')
-    return addDoc(resRef,res)
+  async createRes(client){
+    const user = await this.auth.currentUser;
+    try{
+      const userDocRef = doc(this.firestore,`users/${user.uid}`);
+      await setDoc(userDocRef,{
+        client
+      })
+      return true;
+    }catch(e){
+      console.log(e);
+      return null;
+    }
   }
+  
   
 }
  

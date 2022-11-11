@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Firestore ,collectionData, collection, addDoc} from '@angular/fire/firestore';
+import { Auth, user } from '@angular/fire/auth';
+import { Firestore , doc, setDoc} from '@angular/fire/firestore';
+import { Client } from '../models/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-  constructor(private firestore:Firestore) { }
+  constructor(private firestore:Firestore,
+    private auth:Auth) { }
 
-  createClient(client){
-    const clientRef = collection(this.firestore,'users')
-    return addDoc(clientRef,client)
+  async createClient(client:Client){
+    const user = await this.auth.currentUser;
+    try{
+      const userDocRef = doc(this.firestore,`users/${user.uid}`);
+      await setDoc(userDocRef,{
+        client
+      })
+      return true;
+    }catch(e){
+      console.log(e);
+      return null;
+    }
   }
 }

@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     petition.then((message)=>{ 
-      this.router.navigateByUrl('/user-type',{replaceUrl:true});
+      this.router.navigateByUrl('/app/home',{replaceUrl:true});
     }).catch((message)=>{
       //this.showAlert('No se pudo acceder',message)
     })
@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
     }).catch((message)=>{
       //this.showAlert('No se pudo acceder',message)
     })
-    await this.router.navigateByUrl('/user-type',{replaceUrl:true});
+    await this.router.navigateByUrl('/app/home',{replaceUrl:true});
   }
 
 }

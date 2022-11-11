@@ -1,11 +1,78 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-row>
+      <ion-img id="headerLogo" src="/assets/images/logoHeader.png" size="xs"></ion-img>
+      <ion-label id="headerTitle" align-self-end>GeoLocal</ion-label>  
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="logout()">
-    Cerrar sesion
-  </ion-button>
+  <div class="profile">
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <ion-img *ngIf="profile?.imageURL; else placeholder_avatar;" [src]="profile.imageURL"></ion-img>
+      <ng-template #placeholder_avatar>
+        <div class="fallback">
+          <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+          <p class="profileIcontext">+</p>
+        </div>
+      </ng-template>
+    </ion-avatar>
+    
+  </div>
+  <div id="username"><p>Edssongera</p></div>
+  <div class="buttons">
+    <ion-button >
+      <p>Editar Perfil</p>
+    </ion-button>
+    <ion-button (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <div id="divdiv">
+    <ion-item-divider class="divider"> </ion-item-divider>
+  </div>
+</div>
+
+<div class="publics">  
+  <ion-col>
+    <ion-card *ngFor="let post of posts" >
+      <div *ngIf="post.author==profile.client.user">
+      <ion-card-header>
+        <div class="row">
+          <div class="column" (click)="seePost(post.id)">
+            <ion-img></ion-img>
+            <ion-card-title>{{ post.title }}</ion-card-title>
+            <ion-card-subtitle>{{ post.text }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+          </div>
+          <div class="column">
+            <div class="dropdown"  >
+              <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
+              <div class="dropdown-content">
+                <a (click)="deleteConfirmation(post)">Eliminar</a>
+                <a >Editar</a>
+              </div>
+            </div>  
+          </div>
+        </div>         
+      </ion-card-header>
+      
+      <ion-card-content (click)="seePost(post.id)">
+        <ion-col>
+          <ion-slides pager="true" loop="true">
+            <ng-container *ngFor="let item of post.images;">
+              <ion-slide >
+                <img src="{{item}}">
+              </ion-slide>
+            </ng-container>
+          </ion-slides>
+        </ion-col>
+        <ion-button class="ion-margin-bottom ion-float-right"><ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>Comentarios</ion-button>
+      </ion-card-content>
+      </div>
+    </ion-card>
+
+  </ion-col>
+</div>
 </ion-content>
