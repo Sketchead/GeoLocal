@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   profile = null;
   userLogged? = null;
   posts = [];
-  
+  ownPosts = null;
   constructor(private auth:AuthService,
     private router:Router,
     private avatarService:AvatarService,
@@ -30,6 +30,7 @@ export class ProfilePage implements OnInit {
         if (user) {
           this.avatarService.getUserProfile().subscribe((data)=>{
             this.profile = data;
+            this.ownPosts = data.client.user
           })
           this.dataService.getPosts().subscribe(res=>{
             this.posts = res;

@@ -30,6 +30,11 @@ export class DataService {
     const postsRef = collection(this.firestore,'posts');
     return collectionData(postsRef, { idField: 'id'}) as Observable<Post[]>;
   }
+
+  getProfiles(): Observable<Post[]>{
+    const profileRef = collection(this.firestore,'users');
+    return collectionData(profileRef, { idField: 'user'}) as Observable<Post[]>;
+  }
   
   getPostById(id: string): Post{
     let pst: Post;

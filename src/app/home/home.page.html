@@ -23,9 +23,19 @@
       <ion-card-header>
         <div class="row">
           <div class="column" (click)="seePost(post.id)">
-            <ion-img></ion-img>
-            <ion-card-title>{{ post.title }}</ion-card-title>
-            <ion-card-subtitle>{{ post.text }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+            <div class="profile">
+            <ion-avatar >
+              <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
+              <ng-template #placeholder_avatar>
+                <div class="fallback">
+                  <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+                  <p class="profileIcontext"></p>
+                </div>
+              </ng-template>
+            </ion-avatar>
+            <ion-card-title>{{ user(post) }}</ion-card-title>
+            <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+          </div>
           </div>
           <div class="column">
             <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid">
@@ -40,7 +50,7 @@
       </ion-card-header>
       
       <ion-card-content (click)="seePost(post.id)">
-        <ion-col>
+        <ion-col class="imgs">
           <ion-slides pager="true" loop="true">
             <ng-container *ngFor="let item of post.images;">
               <ion-slide >
@@ -49,6 +59,10 @@
             </ng-container>
           </ion-slides>
         </ion-col>
+        <div class="text">
+          <p class="title">{{ post.title }}</p>
+          <p class="subtitle">{{ postText(post.text) }} </p>
+        </div>
         <ion-button class="ion-margin-bottom ion-float-right"><ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>Comentarios</ion-button>
       </ion-card-content>
     </ion-card>

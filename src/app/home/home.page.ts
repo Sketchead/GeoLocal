@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { Auth } from '@angular/fire/auth';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AvatarService } from '../services/avatar.service';
+import { Post } from '../models/post';
+
 
 @Component({
   selector: 'app-home',
@@ -12,14 +16,69 @@ import { AlertController, LoadingController } from '@ionic/angular';
 export class HomePage {
   userLogged? = null;
   posts = [];
-  constructor(private router: Router,private dataService: DataService, private auth:Auth,
-    private alertController: AlertController,private loadingController:LoadingController) {
+  profiles= [];
+  profilePicture = null;
+  username = null;
+  constructor(private router: Router,
+    private dataService: DataService, 
+    private auth:Auth,
+    private alertController: AlertController,
+    private loadingController:LoadingController,
+    private avatarService:AvatarService) {
         this.dataService.getPosts().subscribe(res=>{
           this.posts = res;
         })
-        //this.userLogged = this.auth.currentUser.uid;
+        this.dataService.getProfiles().subscribe(res=>{
+          this.profiles = res;
+        })
+        const gauth = getAuth();
+      onAuthStateChanged(gauth, (user) => {
+        if (user) {
+          this.userLogged = this.auth.currentUser.uid;
+        } 
+      });
+
     }
-    
+    postText(postText:string){
+      if(postText==undefined){
+        return postText
+      }
+      if(postText.length>250){
+        postText = postText.substring(0,200)
+        return postText+" ..."
+      }
+      return postText
+    }
+    hasimage(post:Post){
+      for(let i=0;i<this.profiles.length;i++){
+        if(post.author==this.profiles[i].client.user){
+          this.profilePicture = this.profiles[i].imageURL
+          return true
+        }
+      }
+      return false
+    }
+
+    user(post:Post){
+      for(let i=0;i<this.profiles.length;i++){
+        if(post.author==this.profiles[i].client.user){
+          this.username = this.profiles[i].client.username
+          return this.username
+        }
+      }
+      return "Prueba"
+    }
+
+    type(post:Post){
+      let type=""
+      for(let i=0;i<this.profiles.length;i++){
+        if(post.author==this.profiles[i].client.user){
+          type = this.profiles[i].client.type
+          return type
+        }
+      }
+      return "tipo"
+    }
     seePost(id: string){
       this.router.navigate(['/view-post'], {
         queryParams: { id: id  },
