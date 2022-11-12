@@ -1,0 +1,97 @@
+#container {
+    text-align: center;
+    position: relative;
+    height: 100vh;
+  }
+  #container::before{
+    content: "";
+    background: url(/assets/images/fondoInicio.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.3;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1; 
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+
+  #logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+  
+  .formulario{
+    display: block;
+    position: relative;
+  }
+
+  .formulario .campo label{
+    position: absolute;
+    margin: 5px;
+    color: #EA7622;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .formulario .campo input{
+    margin: 5px;
+    width: 80%;
+    border: none;
+    font-size: 15px;
+    border-bottom: 2px solid #EA7622;
+    padding-bottom: 5px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    background-color: rgba(0,0,0,0.01);;
+  }
+  .formulario ion-select {
+    color: #EA7622;
+    float: left;
+    margin-left: 8em;
+  }
+
+  .formulario ion-select::placeholder {
+    color: #EA7622;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  #botonRegistro{
+    margin: 15px;
+    width: 80%;
+    border-radius: 20px;
+    font-size: 25x;
+    color: black;
+    background-color: #FFFF;
+    border: 1px solid #EA7622;
+    font-weight: bolder;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  
+  #btnEligeFoto{
+    margin-right: 8em;
+  }

@@ -4,7 +4,7 @@ import { GoogleAuthProvider,signInWithRedirect,FacebookAuthProvider } from "fire
 import { redirectLoggedInTo} from '@angular/fire/auth-guard';
 import { collection,query, where, getDocs } from "firebase/firestore";
 import { createUserWithEmailAndPassword, signOut } from '@firebase/auth';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore,getDoc, doc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +61,16 @@ export class AuthService {
   
   logout(){
     return signOut(this.auth)
+  }
+
+  async getUserType(userId){
+    const docRef = doc(this.firestore,`users/${userId}`)
+    let dataDoc = null
+    getDoc(docRef)
+    .then((doc)=>{
+      console.log(doc.data(),doc.id)
+      dataDoc = doc.data()
+      return dataDoc.type
+    })
   }
 }

@@ -15,9 +15,10 @@ export interface Post{
   id?: string;
   title: string;
   text: string;
-  positive: boolean;
+  positive?: boolean;
   pos?: number[];
   images?: string[];
+  type:string;
 }
 @Injectable({
   providedIn: 'root'

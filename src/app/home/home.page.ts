@@ -6,6 +6,8 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AvatarService } from '../services/avatar.service';
 import { Post } from '../models/post';
+import { AuthService } from '../services/auth.service';
+import { Firestore,getDoc,doc } from '@angular/fire/firestore';
 
 
 @Component({
@@ -19,12 +21,15 @@ export class HomePage {
   profiles= [];
   profilePicture = null;
   username = null;
+  userType  = null;
   constructor(private router: Router,
     private dataService: DataService, 
     private auth:Auth,
     private alertController: AlertController,
     private loadingController:LoadingController,
-    private avatarService:AvatarService) {
+    private avatarService:AvatarService,
+    private authServ: AuthService,
+    private firestore: Firestore) {
         this.dataService.getPosts().subscribe(res=>{
           this.posts = res;
         })
@@ -32,9 +37,14 @@ export class HomePage {
           this.profiles = res;
         })
         const gauth = getAuth();
-      onAuthStateChanged(gauth, (user) => {
+      onAuthStateChanged(gauth, async (user) => {
         if (user) {
           this.userLogged = this.auth.currentUser.uid;
+          const docRef = doc(this.firestore,`users/${this.auth.currentUser.uid}`)
+          await getDoc(docRef).then(async (doc)=>{
+            this.userType = await doc.data().client.type
+            console.log('tipo: ',this.userType)
+          });
         } 
       });
 
@@ -86,8 +96,11 @@ export class HomePage {
     }
     
     createPost(){
-      console.log("click");
       this.router.navigate(['/create-post']);
+    }
+
+    createPublicity(){
+      this.router.navigate(['/create-publicity-post']);
     }
     
     async deletePost(post,confirm){

@@ -5,4 +5,5 @@ export class Post {
     positive: boolean;
     text: string;
     images?: string[];
+    type:string;
 }

@@ -11,32 +11,73 @@
   <ion-header collapse="condense">
   </ion-header>
   <ion-row *ngIf="userLogged">
-    <ion-input (click)="createPost()" placeholder="Publica algo"></ion-input>
-    <a href="http://localhost:8100/publicidad">
-      <ion-button color="success" fill="clear" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
-    </a>  
+    <ng-container *ngIf="userType=='client'">
+      <ion-input (click)="createPost()" placeholder="Publica algo"></ion-input>
+      <ion-button (click)="createPost()" color="success" fill="clear" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
+    </ng-container>
+    <ng-container *ngIf="userType=='client'">
+      <ion-input (click)="createPublicity()" placeholder="Publica algo"></ion-input>
+      <ion-button (click)="createPublicity()" color="success" fill="clear" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon></ion-button>
+    </ng-container>
   </ion-row>
   
   <ion-col>
-    
-    <ion-card *ngFor="let post of posts" >
-      <ion-card-header>
-        <div class="row">
-          <div class="column" (click)="seePost(post.id)">
-            <div class="profile">
-            <ion-avatar >
-              <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
-              <ng-template #placeholder_avatar>
-                <div class="fallback">
-                  <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
-                  <p class="profileIcontext"></p>
+    <ng-container *ngFor="let post of posts">
+    <ng-container *ngIf="post.type!='publicity'">
+      <ion-card>
+        <ion-card-header>
+          <div class="row">
+            <div class="column" (click)="seePost(post.id)">
+              <div class="profile">
+              <ion-avatar >
+                <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
+                <ng-template #placeholder_avatar>
+                  <div class="fallback">
+                    <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+                    <p class="profileIcontext"></p>
+                  </div>
+                </ng-template>
+              </ion-avatar>
+              <ion-card-title>{{ user(post) }}</ion-card-title>
+              <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+            </div>
+            </div>
+            <div class="column">
+              <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid">
+                <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
+                <div class="dropdown-content">
+                  <a (click)="deleteConfirmation(post)">Eliminar</a>
+                  <a >Editar</a>
                 </div>
-              </ng-template>
-            </ion-avatar>
-            <ion-card-title>{{ user(post) }}</ion-card-title>
-            <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+              </div>  
+            </div>
+          </div>         
+        </ion-card-header>
+        
+        <ion-card-content (click)="seePost(post.id)">
+          <ion-col class="imgs">
+            <ion-slides pager="true" loop="true">
+              <ng-container *ngFor="let item of post.images;">
+                <ion-slide >
+                  <img src="{{item}}">
+                </ion-slide>
+              </ng-container>
+            </ion-slides>
+          </ion-col>
+          <div class="text">
+            <p class="title">{{ post.title }}</p>
+            <p class="subtitle">{{ postText(post.text) }} </p>
           </div>
-          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    <ng-container *ngIf="post.type=='publicity'">
+      
+      <ion-card color="medium">
+        <ion-card-header>
+          <ion-title>
+            <i>Publicidad</i>
+          
           <div class="column">
             <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid">
               <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
@@ -46,27 +87,27 @@
               </div>
             </div>  
           </div>
-        </div>         
-      </ion-card-header>
+        </ion-title>
+        </ion-card-header>
+        <ion-card-content (click)="seePost(post.id)">
+          <ion-col class="imgs">
+            <ion-slides pager="true" loop="true">
+              <ng-container *ngFor="let item of post.images;">
+                <ion-slide >
+                  <img src="{{item}}">
+                </ion-slide>
+              </ng-container>
+            </ion-slides>
+          </ion-col>
+          <div class="text">
+            <p class="title">{{ post.title }}</p>
+            <p class="subtitle">{{ postText(post.text) }} </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
       
-      <ion-card-content (click)="seePost(post.id)">
-        <ion-col class="imgs">
-          <ion-slides pager="true" loop="true">
-            <ng-container *ngFor="let item of post.images;">
-              <ion-slide >
-                <img src="{{item}}">
-              </ion-slide>
-            </ng-container>
-          </ion-slides>
-        </ion-col>
-        <div class="text">
-          <p class="title">{{ post.title }}</p>
-          <p class="subtitle">{{ postText(post.text) }} </p>
-        </div>
-        <ion-button class="ion-margin-bottom ion-float-right"><ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>Comentarios</ion-button>
-      </ion-card-content>
-    </ion-card>
-    
+    </ng-container>    
   </ion-col>
   
 </ion-content>
