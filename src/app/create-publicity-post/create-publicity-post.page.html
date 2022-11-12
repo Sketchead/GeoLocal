@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Publicidad</ion-title>
+    <ion-row>
+      <ion-buttons>
+        <ion-back-button>Volver atrás</ion-back-button>
+      </ion-buttons> 
+    </ion-row> 
+    <ion-title>create-publicity-post</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,22 +20,18 @@
     <form>
       <div class="formulario">
         <div class="campo">
-          <label>NOMBRE RESTAURANT</label>
+          <label>TÍTULO</label>
           <input type="text" id="title" name="title" [(ngModel)]="title" required>
         </div>
         <div class="campo">
-          <label>DESCRIPCIÓN</label>
+          <label>RESEÑA</label>
           <input type="text" id="text" name="text" [(ngModel)]="text" required>
         </div>
         <div class="campo">
-            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Subir Fotografia</ion-button>
+            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
         </div>
         <button id="botonRegistro" type="submit" (click)="addPost()">PUBLICAR</button>
       </div>
     </form>
   </div>
 </ion-content>
-
-
-
-

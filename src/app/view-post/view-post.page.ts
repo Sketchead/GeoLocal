@@ -15,7 +15,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class ViewPostPage implements OnInit {
   
-  public post : Post = {title:'a',text:'e',positive:true};
+  public post : Post = {title:'a',text:'e',positive:true,type:""};
   public a: Params;
   public isOwner: Boolean;
   profiles= [];

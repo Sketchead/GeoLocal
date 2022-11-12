@@ -1,4 +1,3 @@
-import { RestaurantService } from '../services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController,LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -8,15 +7,12 @@ import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
-
-
 @Component({
-  selector: 'app-publicidad',
-  templateUrl: './publicidad.page.html',
-  styleUrls: ['./publicidad.page.scss'],
+  selector: 'app-create-publicity-post',
+  templateUrl: './create-publicity-post.page.html',
+  styleUrls: ['./create-publicity-post.page.scss'],
 })
-export class PublicidadPage implements OnInit {
-
+export class CreatePublicityPostPage implements OnInit {
   credentials: FormGroup;
   title:string;
   text:string;
@@ -25,21 +21,12 @@ export class PublicidadPage implements OnInit {
   pos:number[];
   images: string[];
   b64imx: Photo;
-
-  constructor( 
-    private dataservice: DataService, 
-    private router: Router, 
-    private loadingController: LoadingController,    
-    private auth:Auth,
-    private a:AuthService,
-    private alertController: AlertController
-    ) { }
-
-  
+  type:string;
+  constructor(private dataservice: DataService, private router: Router, private loadingController: LoadingController,    private auth:Auth,
+    private a:AuthService,private alertController: AlertController) { }
 
   ngOnInit() {
   }
-
   async addPost(){
     //let postID: string;
     const loading = await this.loadingController.create();
@@ -49,7 +36,7 @@ export class PublicidadPage implements OnInit {
        author:this.auth.currentUser.uid,
        title: this.title,
        text:this.text,
-       positive:this.positive
+       type:"publicity"
       }
       
       const postedId = await this.dataservice.addPostGetId(this.post);
@@ -66,7 +53,6 @@ export class PublicidadPage implements OnInit {
     });
     console.log(image);
     this.b64imx=image
-   
   }
 
   async editPostAddPhoto(postedId: string){
@@ -80,7 +66,7 @@ export class PublicidadPage implements OnInit {
       if(!result){
         const alert = await this.alertController.create({
           header: 'Acción fallida',
-          message: 'Ocurrio un error al subir la foto',
+          message: 'Hubo un problema al subir tu foto',
           buttons: ['OK']
         });
         await alert.present();
@@ -88,5 +74,4 @@ export class PublicidadPage implements OnInit {
     }
     this.router.navigateByUrl('/app/home',{replaceUrl:true});  
   }
-
 }

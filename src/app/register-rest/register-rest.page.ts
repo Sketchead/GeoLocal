@@ -34,19 +34,19 @@ export class RegisterRestPage implements OnInit {
       const loading = await this.loadingController.create();
       await loading.present();
       const gauth = getAuth();
-      onAuthStateChanged(gauth, (user) => {
-        if (user) {
+
+
           this.rest={
             user:this.auth.currentUser.uid,
             email: this.auth.currentUser.email,
-            name:this.name,
+            name:this.name, 
             resname:this.resname,
             latitude:"21.5039",
             longitude:" -104.895",
             type:"restaurant" 
            }
-        } 
-      });
+        
+      
       
         await this.restaurantService.createRes(this.rest)
         await loading.dismiss();

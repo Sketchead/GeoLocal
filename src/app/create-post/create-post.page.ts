@@ -22,6 +22,7 @@ export class CreatePostPage implements OnInit {
   pos:number[];
   images: string[];
   b64imx: Photo;
+  type:string;
   constructor(private dataservice: DataService, private router: Router, private loadingController: LoadingController,    private auth:Auth,
     private a:AuthService,private alertController: AlertController) { 
       /*       this.pos[0]=21.50951
@@ -40,7 +41,8 @@ export class CreatePostPage implements OnInit {
        author:this.auth.currentUser.uid,
        title: this.title,
        text:this.text,
-       positive:this.positive
+       positive:this.positive,
+       type:"post"
       }
       
       const postedId = await this.dataservice.addPostGetId(this.post);

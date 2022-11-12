@@ -37,13 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./tablinks/tablinks.module').then(m => m.TablinksPageModule),
    },
   {
-    path: 'publicidad',
-    loadChildren: () => import('./publicidad/publicidad.module').then( m => m.PublicidadPageModule)
-  },
-  {
     path: 'view-post', //TODAVIA NO SIRVE
     loadChildren: () => import('./view-post/view-post.module').then( m => m.ViewPostPageModule)
-  },  {
+  },
+  {
     path: 'create-post',
     loadChildren: () => import('./create-post/create-post.module').then( m => m.CreatePostPageModule)
   },
@@ -54,6 +51,10 @@ const routes: Routes = [
   {
     path: 'datos-restaurant',
     loadChildren: () => import('./datos-restaurant/datos-restaurant.module').then( m => m.DatosRestaurantPageModule)
+  },
+  {
+    path: 'create-publicity-post',
+    loadChildren: () => import('./create-publicity-post/create-publicity-post.module').then( m => m.CreatePublicityPostPageModule)
   }
 
 
