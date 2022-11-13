@@ -36,13 +36,12 @@ export class EditPostPage implements OnInit {
       await getDoc(docRef)
       .then(async (doc)=>{
         this.post.id = params.id
-        this.post.title = await doc.data().title
-        this.post.images = await doc.data().images
-        this.post.text = await doc.data().text
+        this.title=this.post.title = await doc.data().title
+        this.images=this.post.images = await doc.data().images
+        this.text=this.post.text = await doc.data().text
         this.post.author = await doc.data().author
-        this.post.positive = await doc.data().positive
-        this.post.pos = await doc.data().pos
-
+        this.positive=this.post.positive = await doc.data().positive
+        this.pos=this.post.pos = await doc.data().pos
       })
     });    
   }
