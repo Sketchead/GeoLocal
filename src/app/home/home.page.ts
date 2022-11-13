@@ -94,7 +94,14 @@ export class HomePage {
         queryParams: { id: id  },
       });
     }
-    
+
+    updatePost(id: string){
+      console.log('upd click')
+      this.router.navigate(['/edit-post'], {
+        queryParams: { id: id  },
+      });
+    }
+
     createPost(){
       this.router.navigate(['/create-post']);
     }

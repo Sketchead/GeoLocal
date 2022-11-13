@@ -95,8 +95,8 @@ export class DataService {
     return updateDoc(postsDocRef, {
       title: post.title,
       text: post.text,
-      positive: post.positive,
-      images: post.images})
+      positive: post.positive
+      })
     }
     
     async uploadPhoto(cameraFile: Photo){

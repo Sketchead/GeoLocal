@@ -53,6 +53,12 @@ export class ViewPostPage implements OnInit {
         })
       });    
     }
+    updatePost(id: string){
+      console.log('upd click')
+      this.router.navigate(['/edit-post'], {
+        queryParams: { id: id  },
+      });
+    }
     
     postText(postText:string){
       if(postText==undefined){

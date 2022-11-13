@@ -55,7 +55,11 @@ const routes: Routes = [
   {
     path: 'create-publicity-post',
     loadChildren: () => import('./create-publicity-post/create-publicity-post.module').then( m => m.CreatePublicityPostPageModule)
+  },  {
+    path: 'edit-post',
+    loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
   }
+
 
 
 
