@@ -184,5 +184,10 @@ export class ProfilePage implements OnInit {
       });
       await alert.present();
     }
+
+    editar(){
+      this.router.navigateByUrl('datos-cliente',{replaceUrl:true});
+    }
+
   }
   

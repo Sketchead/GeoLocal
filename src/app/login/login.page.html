@@ -6,18 +6,18 @@
   </ion-header>
   
   <div id="container">
-    <div id="logo">
+    <div id="logo"> 
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form (ngSubmit)="register()">
+    <form [formGroup]="credentials" (ngSubmit)="register()">
       <div class="formulario">
         <div class="campo">
           <label>CORREO</label>
-          <input >
+          <input type="text" id="correo" formControlName="email" required>
         </div>
         <div class="campo">
           <label>CONTRASEÑA</label>
-          <input >
+          <input type="password" class="password" id="password" formControlName="password" required>
         </div>
         <button id="botonIngresar" type="submit" >INGRESAR</button>
       </div>

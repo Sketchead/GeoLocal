@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     private router:Router,
     private alertController: AlertController,
     private authService:AuthService,
-    private loadingController:LoadingController,) { }
+    private loadingController:LoadingController,) { } 
 
   get email(){
     return this.credentials.get('email');

@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
         await loading.present();
         
         const petition = new Promise((resolve,reject)=>{
-          const user = this.authService.register(this.credentials.value);
+          const user = this.credentials.value;
           if(user){
             resolve('exito')
           }else{
@@ -53,7 +53,7 @@ export class RegisterPage implements OnInit {
         petition.then((message)=>{ 
           this.router.navigateByUrl('/user-type',{replaceUrl:true});
         }).catch((message)=>{
-          this.showAlert('Fallo registro','No se pudo realizar el registro')
+          this.showAlert('Fallo el ingreso','No se pudo ingresar')
         })
       }
       //------------------------GOOGLE----------------------

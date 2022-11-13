@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 //import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
 
 @Component({
@@ -10,11 +11,13 @@ export class DatosClientePage implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
 
-  
+  confirmar(){
+    this.router.navigateByUrl('/app/profile',{replaceUrl:true});
+  }
 
 }
