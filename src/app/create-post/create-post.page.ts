@@ -20,7 +20,7 @@ export class CreatePostPage implements OnInit {
   positive:boolean;
   post: Post;
   pos:number[];
-  images: string[];
+  images: string[]; 
   b64imx: Photo;
   type:string;
   constructor(private dataservice: DataService, private router: Router, private loadingController: LoadingController,    private auth:Auth,

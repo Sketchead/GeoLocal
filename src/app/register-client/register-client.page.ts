@@ -22,7 +22,7 @@ export class RegisterClientPage implements OnInit {
   username:string;
   firstLastname:string;
   secondLastname:string;
-  
+   
   constructor(
     private clientService :ClientService,
     private auth:Auth,
@@ -34,7 +34,7 @@ export class RegisterClientPage implements OnInit {
     ngOnInit() {
       
     }
-    
+     
     async addclient(){
       const loading = await this.loadingController.create();
       await loading.present();
