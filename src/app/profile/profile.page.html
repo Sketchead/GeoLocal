@@ -21,7 +21,8 @@
     </ion-avatar>
     
   </div>
-  <div id="username"><p>Edssongera</p></div>
+  <div id="username"><p *ngIf="profile.client.username">{{profile.client.username}}</p>
+    <p *ngIf="profile.client.resname">{{profile.client.resname}}</p></div>
   <div class="buttons">
     <ion-button (click)="editar()">
       <p>Editar Perfil</p>

@@ -9,15 +9,15 @@
     <div id="logo"> 
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form [formGroup]="credentials" (ngSubmit)="register()">
+    <form [formGroup]="credentials">
       <div class="formulario">
         <div class="campo">
           <label>CORREO</label>
-          <input type="text" id="correo" formControlName="email" required>
+          <input type="text" id="correo" required>
         </div>
         <div class="campo">
           <label>CONTRASEÑA</label>
-          <input type="password" class="password" id="password" formControlName="password" required>
+          <input type="password" class="password" id="password"  required>
         </div>
         <button id="botonIngresar" type="submit" >INGRESAR</button>
       </div>
