@@ -26,20 +26,25 @@
           <label>RESEÑA</label>
           <input type="text" id="text" name="text" [(ngModel)]="text" value="{{post.text}}"> 
         </div>
+        <ng-container *ngIf="post.type=='post'">
+          <div class="campo">
+            <ion-select placeholder="Seleccionar" id="positive" name="positive" [(ngModel)]="positive" >
+              <ion-select-option [value]="true" >Positiva</ion-select-option>
+              <ion-select-option [value]="false">Negativa</ion-select-option>
+            </ion-select>
+            <br><br>
+          </div>
+        </ng-container>
         <div class="campo">
-          <ion-select placeholder="Seleccionar" id="positive" name="positive" [(ngModel)]="positive" >
-            <ion-select-option [value]="true" >Positiva</ion-select-option>
-            <ion-select-option [value]="false">Negativa</ion-select-option>
-          </ion-select>
-        </div>
-        <div class="campo">
-          <ion-slides pager="true" loop="true">
+          <ion-slides class="img-slide" pager="true" loop="true">
             <ng-container *ngFor="let item of post.images;">
               <ion-slide >
-                <img src="{{item}}">
+                <img height="200" width="200" src="{{item}}">
               </ion-slide>
             </ng-container>
           </ion-slides>
+        </div>
+        <div class="campo">
             <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
         </div>
         <button id="botonRegistro" type="submit" (click)="addPost()">Editar</button>

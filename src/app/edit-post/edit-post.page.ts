@@ -42,6 +42,7 @@ export class EditPostPage implements OnInit {
         this.post.author = await doc.data().author
         this.positive=this.post.positive = await doc.data().positive
         this.pos=this.post.pos = await doc.data().pos
+        this.type=this.post.type = await doc.data().type
       })
     });    
   }
@@ -58,6 +59,8 @@ export class EditPostPage implements OnInit {
        positive:this.positive,
        type:"post"
       }
+      if(!this.post2.positive)
+      this.post2.positive=true;
       
       this.dataservice.updatePost(this.post2);
       await loading.dismiss();
