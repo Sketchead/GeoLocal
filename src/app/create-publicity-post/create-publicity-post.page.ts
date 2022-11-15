@@ -7,6 +7,8 @@ import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
+import { Geolocation } from '@capacitor/geolocation';
+
 @Component({
   selector: 'app-create-publicity-post',
   templateUrl: './create-publicity-post.page.html',
@@ -18,12 +20,24 @@ export class CreatePublicityPostPage implements OnInit {
   text:string;
   positive:boolean;
   post: Post;
-  pos:number[];
+  pos:number[] = [1,2];
   images: string[];
   b64imx: Photo;
   type:string;
   constructor(private dataservice: DataService, private router: Router, private loadingController: LoadingController,    private auth:Auth,
-    private a:AuthService,private alertController: AlertController) { }
+    private a:AuthService,private alertController: AlertController) {
+      const printCurrentPosition = async () => {
+        const coordinates = await Geolocation.getCurrentPosition();
+      
+        this.pos[0]=(coordinates.coords.latitude);
+        this.pos[1]=(coordinates.coords.longitude);
+        console.log('Lat:', this.pos[0]);
+        console.log('Lon:', this.pos[1]);
+
+      };
+
+      printCurrentPosition()
+     }
 
   ngOnInit() {
   }
@@ -36,6 +50,7 @@ export class CreatePublicityPostPage implements OnInit {
        author:this.auth.currentUser.uid,
        title: this.title,
        text:this.text,
+       pos:this.pos,
        type:"publicity"
       }
       
