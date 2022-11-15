@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-create-post',
@@ -19,7 +20,7 @@ export class CreatePostPage implements OnInit {
   text:string;
   positive:boolean;
   post: Post;
-  pos:number[];
+  pos:number[] = [1,2];
   images: string[]; 
   b64imx: Photo;
   type:string;
@@ -27,6 +28,17 @@ export class CreatePostPage implements OnInit {
     private a:AuthService,private alertController: AlertController) { 
       /*       this.pos[0]=21.50951
       this.pos[1]=-104.89569 */
+      const printCurrentPosition = async () => {
+        const coordinates = await Geolocation.getCurrentPosition();
+      
+        this.pos[0]=(coordinates.coords.latitude);
+        this.pos[1]=(coordinates.coords.longitude);
+        console.log('Lat:', this.pos[0]);
+        console.log('Lon:', this.pos[1]);
+
+      };
+
+      printCurrentPosition()
     }
 
   ngOnInit() {
@@ -42,6 +54,7 @@ export class CreatePostPage implements OnInit {
        title: this.title,
        text:this.text,
        positive:this.positive,
+       pos:this.pos,
        type:"post"
       }
       
