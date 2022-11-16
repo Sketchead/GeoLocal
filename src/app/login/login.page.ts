@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private router:Router,
     private alertController: AlertController,
     private authService:AuthService,
-    private loadingController:LoadingController,) { } 
+    private loadingController:LoadingController,
+    private reactiveForm:ReactiveFormsModule) { } 
 
   get email(){
     return this.credentials.get('email');
@@ -42,7 +44,7 @@ export class LoginPage implements OnInit {
           if(user){
             resolve('exito')
           }else{
-            reject('fallo')
+            reject(user)
           }
         });
         

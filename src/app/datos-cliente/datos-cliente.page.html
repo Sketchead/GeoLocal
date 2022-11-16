@@ -1,48 +1,46 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Modificar informacion</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-  
-  <div id="container">
-    <div id="logo">
-      <ion-img src="/assets/images/Usuario.png"></ion-img>
+<ion-content>   
+  <div id="container" >
+    <div class="header">
+      <ion-back-button (click)="back()"></ion-back-button>
+      <ion-title>Editar perfil</ion-title>
     </div>
-    <form ngNativeValidate>
-      <div class="formulario">
+    <form (ngSubmit)="updateConfirmation()" ngNativeValidate>
+      <div class="formulario" *ngIf="type()=='client'">
         <div class="campo">
-          <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Editar fotografia</ion-button>
+          <label>NOMBRE(S)</label>
+          <input type="text" id="nombre" name="name" [(ngModel)]="name" required>
         </div>
         <div class="campo">
-          <label>Nombre</label>
-          <input type="text" id="nombre" name="nombre"  required>
+          <label>NOMBRE USUARIO</label>
+          <input type="text" id="username" name="username" [(ngModel)]="username" required>
         </div>
         <div class="campo">
-          <label>Apellido paterno</label>
-          <input type="text" id="apellidoP" name="apellidop" required>
+          <label>APELLIDO PATERNO</label>
+          <input type="text" id="pLastname" name="pLastname" [(ngModel)]="firstLastname" required>
         </div>
         <div class="campo">
-          <label>Apellido materno</label>
-          <input type="text" id="apellidoM" name="apellidom" required>
+          <label>APELLIDO MATERNO</label>
+          <input type="text" id="mLastname" name="mLastname" [(ngModel)]="secondLastname" required>
         </div>
-        <div class="campo">
-          <label>Edad</label>
-          <input type="number" id="edad" name="edad"  required>
-        </div> 
-        <div class="campo">
-          <label>Estado</label>
-          <input type="number" id="estado" name="estado"  required>
-        </div>
-        <div class="campo">
-          <label>Ciudad</label>
-          <input type="number" id="ciudad" name="ciudad"  required>
-        </div>
-        <button id="botonConfirmar" type="submit" (click)="confirmar()">CONFIRMAR CAMBIOS</button>
+        <button id="botonRegistro" type="submit" >CONFIRMAR</button>
       </div>
+
+      <div class="formulario" *ngIf="type()=='res'">
+        <div class="campo">
+          <label>NOMBRE(S)</label>
+          <input type="text" id="nombre" name="name" [(ngModel)]="name" required>
+        </div>
+        <div class="campo">
+          <label>NOMBRE LOCAL</label>
+          <input type="text" id="resname" name="resname" [(ngModel)]="resname"required>
+        </div>
+        <div class="campo">
+          <label>UBICACION</label>
+          <button id="botonUbicacion">SELECCIONAR</button>
+        </div>
+        <button id="botonRegistro" type="submit" >CONFIRMAR</button>
+      </div>
+
     </form>
   </div>
 </ion-content>
