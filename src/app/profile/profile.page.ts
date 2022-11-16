@@ -20,6 +20,7 @@ export class ProfilePage implements OnInit {
   profiles= [];
   profilePicture = null;
   username = null;
+  profileuser = ""
   constructor(private auth:AuthService,
     private router:Router,
     private avatarService:AvatarService,
@@ -36,6 +37,7 @@ export class ProfilePage implements OnInit {
           this.avatarService.getUserProfile().subscribe((data)=>{
             this.profile = data;
             this.ownPosts = data.client.user
+            this.profileuser = data.client.username
           })
           this.dataService.getPosts().subscribe(res=>{
             this.posts = res;
@@ -49,7 +51,6 @@ export class ProfilePage implements OnInit {
     }
     
     ngOnInit() {
-      
       
     }
     postText(postText:string){

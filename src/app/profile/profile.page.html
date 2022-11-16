@@ -21,8 +21,7 @@
     </ion-avatar>
     
   </div>
-  <div id="username"><p *ngIf="profile.client.username">{{profile.client.username}}</p>
-    <p *ngIf="profile.client.resname">{{profile.client.resname}}</p></div>
+  <div id="username"><p>{{profileuser}}</p></div>
   <div class="buttons">
     <ion-button (click)="editar()">
       <p>Editar Perfil</p>
@@ -83,7 +82,7 @@
           <p class="title">{{ post.title }}</p>
           <p class="subtitle">{{ postText(post.text) }} </p>
         </div>
-        <ion-button class="ion-margin-bottom ion-float-right"><ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>Comentarios</ion-button>
+       
       </ion-card-content>
       </div>
     </ion-card>
