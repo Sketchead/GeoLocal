@@ -30,6 +30,7 @@ export class HomePage {
     private avatarService:AvatarService,
     private authServ: AuthService,
     private firestore: Firestore) {
+
         this.dataService.getPosts().subscribe(res=>{
           this.posts = res;
         })
@@ -42,10 +43,15 @@ export class HomePage {
           this.userLogged = this.auth.currentUser.uid;
           const docRef = doc(this.firestore,`users/${this.auth.currentUser.uid}`)
           await getDoc(docRef).then(async (doc)=>{
-            this.userType = await doc.data().client.type
-            console.log('tipo: ',this.userType)
+            if(doc.data()){
+              this.userType = await doc.data().client.type
+            }else{
+              this.router.navigateByUrl('/user-type',{replaceUrl:true});
+            }
           });
-        } 
+        } else {
+          this.router.navigateByUrl('/login',{replaceUrl:true});
+        }
       });
 
     }

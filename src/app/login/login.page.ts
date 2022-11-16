@@ -57,11 +57,49 @@ export class LoginPage implements OnInit {
 
   //------------------------GOOGLE----------------------
   async googleLogin(){
-    
+    const loading = await this.loadingController.create();
+        await loading.present();
+
+        const petition = new Promise((resolve,reject)=>{
+          const user = this.authService.googleLogin()
+          console.log(user)
+          if(user){
+            resolve('exito')
+          }else{
+            reject('fallo')
+          }
+        });
+
+        await loading.dismiss();
+
+        petition.then((message)=>{ 
+          this.router.navigateByUrl('/app/home',{replaceUrl:true});
+        }).catch((message)=>{
+          this.showAlert('Fallo inicio de sesion',message)
+        })
   }
   //------------------------FACEBOOK----------------------
   async facebookLogin(){
+    const loading = await this.loadingController.create();
+        await loading.present();
 
+        const petition = new Promise((resolve,reject)=>{
+          const user = this.authService.facebookLogin()
+          console.log(user)
+          if(user){
+            resolve('exito')
+          }else{
+            reject('fallo')
+          }
+        });
+
+        await loading.dismiss();
+
+        petition.then((message)=>{ 
+        }).catch((message)=>{
+          this.showAlert('Fallo inicio de sesion',message)
+        })
+        await this.router.navigateByUrl('/app/home',{replaceUrl:true});
   }
 
   async showAlert(header,message) {

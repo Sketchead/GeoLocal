@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
         await loading.dismiss();
         
         petition.then((message)=>{ 
-          this.router.navigateByUrl('/user-type',{replaceUrl:true});
+          this.router.navigateByUrl('/app/home',{replaceUrl:true});
         }).catch((message)=>{
           this.showAlert('Fallo el ingreso','No se pudo ingresar')
         })
@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit {
         await loading.dismiss();
 
         petition.then((message)=>{ 
-          this.router.navigateByUrl('/user-type',{replaceUrl:true});
+          this.router.navigateByUrl('/app/home',{replaceUrl:true});
         }).catch((message)=>{
           this.showAlert('Fallo registro',message)
         })
@@ -101,7 +101,7 @@ export class RegisterPage implements OnInit {
         }).catch((message)=>{
           this.showAlert('Fallo registro',message)
         })
-        await this.router.navigateByUrl('/user-type',{replaceUrl:true});
+        await this.router.navigateByUrl('/app/home',{replaceUrl:true});
       }
       async showAlert(header,message) {
         const alert = await this.alertController.create({

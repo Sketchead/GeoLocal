@@ -11,7 +11,7 @@ import { RegisterPage } from './register.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, 
     IonicModule,
     RegisterPageRoutingModule,
     ReactiveFormsModule
