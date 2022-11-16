@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  getAuth,Auth } from '@angular/fire/auth';
+import {  getAuth,Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { GoogleAuthProvider,signInWithRedirect,FacebookAuthProvider } from "firebase/auth"
 import { redirectLoggedInTo} from '@angular/fire/auth-guard';
 import { collection,query, where, getDocs } from "firebase/firestore";
@@ -16,6 +16,7 @@ export class AuthService {
   async register({email,password}){
     try{
       const user = await createUserWithEmailAndPassword(this.auth,email,password);
+      return user
     }catch(e){
       return null;
     }
@@ -47,22 +48,46 @@ export class AuthService {
     
     const db = collection(this.firestore,'users')
     const isSetup = query(collection(db, "users"), where("user", "==", user));
-    //console.log(isSetup)
     if(!isSetup){
       return () => redirectLoggedInTo(['/user-type'])
     }
     console.log("false")
-     return () => redirectLoggedInTo(['/app/home'])
+    return () => redirectLoggedInTo(['/app/home'])
   }
   
   async login ({email,password}){
-    
+    try{
+      const user = await signInWithEmailAndPassword(this.auth,email,password);
+      return user
+    }catch(e){
+      return null;
+    }
+  }
+  
+  async googleLogin(){
+    try{
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider
+      await signInWithRedirect(auth, provider);
+    }catch(e){
+      return null
+    }
+  }
+  
+  async facebookLogin(){
+    try{
+    const auth = getAuth();
+      const provider = new FacebookAuthProvider();
+      await signInWithRedirect(auth, provider);
+    }catch(e){
+      return null
+    }
   }
   
   logout(){
     return signOut(this.auth)
   }
-
+  
   async getUserType(userId){
     const docRef = doc(this.firestore,`users/${userId}`)
     let dataDoc = null

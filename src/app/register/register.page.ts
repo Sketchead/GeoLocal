@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
         await loading.present();
         
         const petition = new Promise((resolve,reject)=>{
-          const user = this.credentials.value;
+          const user = this.authService.register(this.credentials.value);
           if(user){
             resolve('exito')
           }else{

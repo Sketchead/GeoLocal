@@ -9,21 +9,21 @@
     <div id="logo"> 
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form [formGroup]="credentials">
+    <form [formGroup]="credentials" (ngSubmit)="login()">
       <div class="formulario">
         <div class="campo">
           <label>CORREO</label>
-          <input type="text" id="correo" required>
+          <input type="text" id="correo" formControlName="email" required>
         </div>
         <div class="campo">
           <label>CONTRASEÑA</label>
-          <input type="password" class="password" id="password"  required>
+          <input type="password" class="password" id="password" formControlName="password" required>
         </div>
         <button id="botonIngresar" type="submit" >INGRESAR</button>
       </div>
-    </form> 
+    </form>  
     <hr>Ó<hr>
-    <button id="botonFacebook" type="button" (click)="facebookRegister()">ENTRAR CON FACEBOOK</button>
-    <button id="botonGoogle" type="button" (click)="googleRegister()">ENTRAR CON GOOGLE</button>
+    <button id="botonFacebook" type="button" (click)="googleLogin()">ENTRAR CON FACEBOOK</button>
+    <button id="botonGoogle" type="button" (click)="facebookLogin()">ENTRAR CON GOOGLE</button>
   </div>
 </ion-content>

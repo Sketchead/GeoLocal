@@ -27,59 +27,50 @@ export class LoginPage implements OnInit {
     return this.credentials.get('password');
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.credentials = this.fb.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required]]})
   }
 
-  register(){
-      this.router.navigateByUrl('/app/home',{replaceUrl:true});
+  async login(){
+    const loading = await this.loadingController.create();
+        await loading.present();
+        
+        const petition = new Promise((resolve,reject)=>{
+          const user = this.authService.login(this.credentials.value);
+          if(user){
+            resolve('exito')
+          }else{
+            reject('fallo')
+          }
+        });
+        
+        await loading.dismiss();
+        
+        petition.then((message)=>{ 
+          this.router.navigateByUrl('/app/home',{replaceUrl:true});
+        }).catch((message)=>{
+          this.showAlert('Error',message)
+        })
   }
 
   //------------------------GOOGLE----------------------
-  async googleRegister(){
-    const loading = await this.loadingController.create();
-    await loading.present();
-
-    const petition = new Promise((resolve,reject)=>{
-      const user = this.authService.googleregister()
-      console.log(user)
-      if(user){
-        resolve('exito')
-      }else{
-        reject('fallo')
-      }
-    });
-
-    await loading.dismiss();
-
-    petition.then((message)=>{ 
-      this.router.navigateByUrl('/app/home',{replaceUrl:true});
-    }).catch((message)=>{
-      //this.showAlert('No se pudo acceder',message)
-    })
+  async googleLogin(){
     
   }
   //------------------------FACEBOOK----------------------
-  async facebookRegister(){
-    const loading = await this.loadingController.create();
-    await loading.present();
+  async facebookLogin(){
 
-    const petition = new Promise((resolve,reject)=>{
-      const user = this.authService.facebookregister()
-      console.log(user)
-      if(user){
-        resolve('exito')
-      }else{
-        reject('fallo')
-      }
-    });
-
-    await loading.dismiss();
-
-    petition.then((message)=>{ 
-    }).catch((message)=>{
-      //this.showAlert('No se pudo acceder',message)
-    })
-    await this.router.navigateByUrl('/app/home',{replaceUrl:true});
   }
 
+  async showAlert(header,message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons:['OK'],
+    });
+    await alert.present();
+  }
+  
 }
