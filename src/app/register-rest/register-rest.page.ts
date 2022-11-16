@@ -40,7 +40,7 @@ export class RegisterRestPage implements OnInit {
             user:this.auth.currentUser.uid,
             email: this.auth.currentUser.email,
             name:this.name, 
-            resname:this.resname,
+            username:this.resname,
             latitude:"21.5039",
             longitude:" -104.895",
             type:"restaurant" 
