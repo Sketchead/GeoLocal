@@ -127,7 +127,7 @@ export class DataService {
       const user = this.auth.currentUser;
       const pId = docId;
       //Agregar id de doc
-      const path = `uploads/${user.uid}/photo.png`;
+      const path = `uploads/${user.uid}/${pId}/photo.png`;
       const storageRef = ref(this.storage,path);
       
       try{
