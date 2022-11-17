@@ -38,6 +38,7 @@ export class HomePage {
           this.posts = res;
 
           const getCPosition = async () => {
+            this.nearbyPosts = [];
             const coordinates = await Geolocation.getCurrentPosition();
             this.pos[0]=(coordinates.coords.latitude);
             this.pos[1]=(coordinates.coords.longitude);
