@@ -139,9 +139,13 @@ export class HomePage {
       });
     }
     seeProfile(id: string){
+      if(id==this.userLogged){
+        this.router.navigate(['/app/profile'])
+      }else{
       this.router.navigate(['/view-profile'], {
         queryParams: { id: id  },
       });
+    }
     }
 
     updatePost(id: string){

@@ -14,7 +14,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./view-post.page.scss'],
 })
 export class ViewPostPage implements OnInit {
-  
+  userLogged? = null;
   public post : Post = {title:'a',text:'e',positive:true,type:""};
   public a: Params;
   public isOwner: Boolean;
@@ -45,6 +45,7 @@ export class ViewPostPage implements OnInit {
           const gauth = getAuth();
           onAuthStateChanged(gauth, (user) => {
             if (user) {
+              this.userLogged = this.auth.currentUser.uid;
               if(this.post.author === this.auth.currentUser.uid){
                 this.isOwner=true;
               }
@@ -58,6 +59,16 @@ export class ViewPostPage implements OnInit {
       this.router.navigate(['/edit-post'], {
         queryParams: { id: id  },
       });
+    }
+
+    seeProfile(id: string){
+      if(id==this.userLogged){
+        this.router.navigate(['/app/profile'])
+      }else{
+      this.router.navigate(['/view-profile'], {
+        queryParams: { id: id  },
+      });
+    }
     }
     
     postText(postText:string){

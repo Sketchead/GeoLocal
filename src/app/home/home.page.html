@@ -27,7 +27,7 @@
       <ion-card>
         <ion-card-header>
           <div class="row">
-            <div class="column" (click)="seePost(post.id)">
+            <div class="column" (click)="seeProfile(post.author)">
               <div class="profile">
               <ion-avatar >
                 <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>

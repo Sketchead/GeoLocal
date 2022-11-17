@@ -1,9 +1,78 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>viewProfile</ion-title>
+    <ion-row>
+      <ion-buttons>
+        <ion-back-button>Volver atrás</ion-back-button>
+      </ion-buttons> 
+      <ion-img id="headerLogo" src="/assets/images/logoHeader.png" size="xs"></ion-img>
+      <ion-label id="headerTitle" align-self-end>GeoLocal</ion-label>  
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="profile">
+    <div class="preview">
+      <ion-avatar>
+        <ion-img *ngIf="profile?.imageURL; else placeholder_avatar;" [src]="profile.imageURL"></ion-img>
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+            <p class="profileIcontext"></p>
+          </div> 
+        </ng-template>
+      </ion-avatar>
+      
+    </div>
+    <div id="username"><p>{{profileuser}}</p></div>
+    <div id="divdiv">
+      <ion-item-divider class="divider"> </ion-item-divider>
+    </div>
+  </div>
+  
+  <div class="publics">  
+    <ion-col>
+      <ion-card *ngFor="let post of posts" >
+        <div *ngIf="post.author==ownPosts">
+          <ion-card-header>
+            <div class="row">
+              <div class="column" (click)="seePost(post.id)">
+                <div class="profile2">
+                  <ion-avatar class="ion-avatar" >
+                    <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
+                    <ng-template #placeholder_avatar>
+                      <div class="fallback">
+                        <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+                        <p class="profileIcontext"></p>
+                      </div>
+                    </ng-template>
+                  </ion-avatar>
+                  <ion-card-title>{{ user(post) }}</ion-card-title>
+                  <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"></ng-container> </ion-card-subtitle>
+                </div>
+              </div>
+            </div>         
+          </ion-card-header>
+          
+          <ion-card-content (click)="seePost(post.id)">
+            <ion-col class="imgs">
+              <ion-slides pager="true" loop="true">
+                <ng-container *ngFor="let item of post.images;">
+                  <ion-slide >
+                    <img src="{{item}}">
+                  </ion-slide>
+                </ng-container>
+              </ion-slides>
+            </ion-col>
+            <div class="text">
+              <p class="title">{{ post.title }}</p>
+              <p class="subtitle">{{ postText(post.text) }} </p>
+            </div>
+            
+          </ion-card-content>
+        </div>
+      </ion-card>
+      
+    </ion-col>
+  </div>
 </ion-content>

@@ -20,6 +20,12 @@ export class AvatarService {
     return docData(userDocRef);
   }
 
+  getUserProfileWId(id){
+    const user = id
+    const userDocRef = doc(this.firestore,`users/${user}`);
+    return docData(userDocRef);
+  }
+
   async uploadPhoto(cameraFile: Photo,client:Client){
     const user = await this.auth.currentUser;
     const path = `uploads/${user.uid}/profile.png`;
