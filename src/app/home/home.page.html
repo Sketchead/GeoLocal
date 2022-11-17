@@ -35,14 +35,27 @@
                   <div class="fallback">
                     <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
                     <p class="profileIcontext"></p>
+                    
                   </div>
                 </ng-template>
               </ion-avatar>
-              <ion-card-title>{{ user(post) }}</ion-card-title>
+              <ion-card-title>{{ user(post)}}</ion-card-title>
+              
               <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
             </div>
+            <ng-container *ngIf="post.positive==true">
+              <ion-chip color="success">
+                <ion-label>Recomendado</ion-label>
+              </ion-chip>
+            </ng-container>
+            <ng-container *ngIf="post.positive==false">
+              <ion-chip color="danger">
+                <ion-label>No Recomendado</ion-label>
+              </ion-chip>
+            </ng-container>
             </div>
             <div class="column">
+              
               <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid">
                 <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
                 <div class="dropdown-content">
@@ -50,6 +63,7 @@
                   <a (click)="updatePost(post.id)">Editar</a>
                 </div>
               </div>  
+              
             </div>
           </div>         
         </ion-card-header>
