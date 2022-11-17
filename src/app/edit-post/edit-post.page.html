@@ -1,18 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-back-button>Volver atrás</ion-back-button>
-    </ion-buttons> 
-    <ion-title>Editar publicación</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
   </ion-header>
   
   <div id="container">
+    <div class="header">
+      <ion-back-button ></ion-back-button>
+      <ion-title>Crear Publicación</ion-title>
+    </div>
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
@@ -45,7 +39,7 @@
           </ion-slides>
         </div>
         <div class="campo">
-            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
+          <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
         </div>
         <button id="botonRegistro" type="submit" (click)="addPost()">Editar</button>
       </div>

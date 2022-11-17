@@ -14,7 +14,7 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    bottom: 0px;
+    bottom: 0px; 
     left: 0px;
     z-index: -1; 
   }
@@ -99,4 +99,14 @@
   .img-slide{
     height: 200px;
     width: 200px;
+  }
+  ion-back-button {
+    display: inline-block;
+    width: 10%;
+  }
+  ion-title{
+    text-align: start;
+    display: inline-block;
+    width: 80%;
+    
   }

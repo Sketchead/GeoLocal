@@ -67,6 +67,17 @@
     margin-bottom: 10px;
     background-color: rgba(0,0,0,0.01);;
   }
+
+  .formulario .campo textarea{
+    margin: 5px;
+    width: 80%;
+    font-size: 15px;
+    border: 2px solid #EA7622;
+    padding-bottom: 5px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    background-color: rgba(0,0,0,0.01);;
+  }
   .formulario ion-select {
     color: #EA7622;
     float: left;
@@ -94,4 +105,15 @@
   
   #btnEligeFoto{
     margin-right: 8em;
+  }
+
+  ion-back-button {
+    display: inline-block;
+    width: 10%;
+  }
+  ion-title{
+    text-align: start;
+    display: inline-block;
+    width: 80%;
+    
   }
