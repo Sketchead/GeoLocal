@@ -53,7 +53,7 @@
                 </ng-template>
               </ion-avatar>
               <ion-card-title>{{ user(post) }}</ion-card-title>
-              <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+              <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"></ng-container> </ion-card-subtitle>
             </div>
           </div>
           <div class="column">
@@ -61,7 +61,7 @@
               <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
               <div class="dropdown-content">
                 <a (click)="deleteConfirmation(post)">Eliminar</a>
-                <a >Editar</a>
+                <a (click)="updatePost(post.id)">Editar</a>
               </div>
             </div>  
           </div>

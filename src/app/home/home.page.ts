@@ -138,6 +138,11 @@ export class HomePage {
         queryParams: { id: id  },
       });
     }
+    seeProfile(id: string){
+      this.router.navigate(['/view-profile'], {
+        queryParams: { id: id  },
+      });
+    }
 
     updatePost(id: string){
       console.log('upd click')

@@ -50,12 +50,13 @@ export class DatosClientePage implements OnInit {
           const docRef = doc(this.firestore,`users/${this.auth.currentUser.uid}`)
           await getDoc(docRef).then(async (doc)=>{
             this.userType = await doc.data().client.type
-            if(this.userType="client"){
+            console.log(this.userType)
+            if(this.userType=="client"){
               this.name = await doc.data().client.name
               this.username = await doc.data().client.username
               this.firstLastname = await doc.data().client.firstLastname
               this.secondLastname = await doc.data().client.secondLastname
-            }else if(this.userType="restaurant"){
+            }else if(this.userType=="restaurant"){
               this.name = await doc.data().client.name
               this.resname = await doc.data().client.username
             }
@@ -103,7 +104,7 @@ export class DatosClientePage implements OnInit {
     
     type(){
       let type = ""
-      type = this.userType 
+      type = this.userType
       return type
     }
     

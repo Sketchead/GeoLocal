@@ -48,7 +48,7 @@ export class ProfilePage implements OnInit {
         }
       });
  
-    }
+    } 
     
     ngOnInit() {
       
@@ -63,6 +63,14 @@ export class ProfilePage implements OnInit {
       }
       return postText
     }
+
+    updatePost(id: string){
+      console.log('upd click')
+      this.router.navigate(['/edit-post'], {
+        queryParams: { id: id  },
+      });
+    }
+    
     hasimage(post:Post){
       for(let i=0;i<this.profiles.length;i++){
         if(post.author==this.profiles[i].client.user){
