@@ -58,6 +58,10 @@ const routes: Routes = [
   },  {
     path: 'edit-post',
     loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
+  },
+  {
+    path: 'view-profile',
+    loadChildren: () => import('./view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   }
 
 

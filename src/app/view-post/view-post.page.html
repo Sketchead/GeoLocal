@@ -16,7 +16,7 @@
   <ion-card >
     <ion-card-header>
       <div class="row">
-      <div class="column">
+      <div class="column" (click)="seeProfile(post.author)">
         <div class="profile">
           <ion-avatar >
             <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
@@ -28,7 +28,7 @@
             </ng-template>
           </ion-avatar>
           <ion-card-title>{{ user(post) }}</ion-card-title>
-          <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"><ion-icon name="thumbs-up-outline"></ion-icon></ng-container> </ion-card-subtitle>
+          <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"></ng-container> </ion-card-subtitle>
         </div>
         <ng-container *ngIf="post.positive==true">
           <ion-chip color="success">

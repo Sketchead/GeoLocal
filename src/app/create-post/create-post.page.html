@@ -1,19 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-row>
-      <ion-buttons>
-        <ion-back-button>Volver atrás</ion-back-button>
-      </ion-buttons> 
-    </ion-row> 
-    <ion-title>create-Post</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-   
+<ion-content >
   <div id="container">
+    <div class="header">
+      <ion-back-button ></ion-back-button>
+      <ion-title>Crear Publicación</ion-title>
+    </div>
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
@@ -25,7 +15,7 @@
         </div>
         <div class="campo">
           <label>RESEÑA</label>
-          <input type="text" id="text" name="text" [(ngModel)]="text" required>
+          <textarea class="textarea" name="text" rows="10" cols="30" [(ngModel)]="text" required></textarea>
         </div>
         <div class="campo">
           <ion-select placeholder="Seleccionar" id="positive" name="positive" [(ngModel)]="positive" required>

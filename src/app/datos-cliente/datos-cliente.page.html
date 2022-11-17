@@ -25,7 +25,7 @@
         <button id="botonRegistro" type="submit" >CONFIRMAR</button>
       </div>
 
-      <div class="formulario" *ngIf="type()=='res'">
+      <div class="formulario" *ngIf="type()=='restaurant'">
         <div class="campo">
           <label>NOMBRE(S)</label>
           <input type="text" id="nombre" name="name" [(ngModel)]="name" required>
@@ -36,7 +36,7 @@
         </div>
         <div class="campo">
           <label>UBICACION</label>
-          <button id="botonUbicacion">SELECCIONAR</button>
+          <button id="botonUbicacion">SELECCIONAR</button> 
         </div>
         <button id="botonRegistro" type="submit" >CONFIRMAR</button>
       </div>
