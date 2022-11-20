@@ -59,8 +59,8 @@ export class EditPostPage implements OnInit {
        positive:this.positive,
        type:"post"
       }
-      if(!this.post2.positive)
-      this.post2.positive=true;
+      /* if(!this.post2.positive)
+      this.post2.positive=true; */
       
       this.dataservice.updatePost(this.post2);
       await loading.dismiss();
