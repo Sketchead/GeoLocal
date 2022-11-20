@@ -7,7 +7,7 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form>
+    <form (ngSubmit)="addPost()" ngNativeValidate>
       <div class="formulario">
         <div class="campo">
           <label>TÍTULO</label>
@@ -17,10 +17,12 @@
           <label>CONTENIDO</label>
           <textarea class="textarea" name="text" rows="10" cols="30" [(ngModel)]="text" required></textarea>
         </div>
-        <div class="campo">
-          <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
-        </div>
-        <button id="botonRegistro" type="submit" (click)="addPost()">PUBLICAR</button>
+        <form>
+          <div class="campo">
+            <ion-button id="btnEligeFoto" (click)="choosePhoto()" color="warning" fill="solid" shape="round" expand="full" type="submit" class="ion-float-right"><ion-icon name="images-outline"></ion-icon>Elegir foto</ion-button>
+          </div>
+        </form>
+        <button id="botonRegistro" type="submit" >PUBLICAR</button>
       </div>
     </form>
   </div>
