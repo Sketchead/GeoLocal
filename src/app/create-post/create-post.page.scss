@@ -78,13 +78,19 @@
     margin-bottom: 10px;
     background-color: rgba(0,0,0,0.01);;
   }
-  .formulario ion-select {
-    color: #EA7622;
-    float: left;
-    margin-left: 8em;
+  .formulario #positive {
+    margin: 5px;
+    width: 80%;
+    border: none;
+    font-size: 15px;
+    border-bottom: 2px solid #EA7622;
+    padding-bottom: 5px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    background-color: rgba(0,0,0,0.01);;
   }
 
-  .formulario ion-select::placeholder {
+  .formulario #positive::placeholder {
     color: #EA7622;
     font-weight: bold;
     font-size: 15px;
