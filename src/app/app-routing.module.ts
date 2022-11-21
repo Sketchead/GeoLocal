@@ -37,7 +37,7 @@ const routes: Routes = [
     loadChildren: () => import('./tablinks/tablinks.module').then(m => m.TablinksPageModule),
    },
   {
-    path: 'view-post', //TODAVIA NO SIRVE
+    path: 'view-post', 
     loadChildren: () => import('./view-post/view-post.module').then( m => m.ViewPostPageModule)
   },
   {
@@ -55,14 +55,19 @@ const routes: Routes = [
   {
     path: 'create-publicity-post',
     loadChildren: () => import('./create-publicity-post/create-publicity-post.module').then( m => m.CreatePublicityPostPageModule)
-  },  {
+  },
+  {
     path: 'edit-post',
     loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
   },
   {
     path: 'view-profile',
     loadChildren: () => import('./view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
+  },  {
+    path: 'home-guest',
+    loadChildren: () => import('./home-guest/home-guest.module').then( m => m.HomeGuestPageModule)
   }
+
 
 
 
