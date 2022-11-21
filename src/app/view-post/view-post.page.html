@@ -3,68 +3,81 @@
     <ion-title>
 
     </ion-title>
-    
+
     <ion-row>
       <ion-buttons>
         <ion-back-button>Volver atrás</ion-back-button>
-      </ion-buttons> 
-    </ion-row> 
+      </ion-buttons>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card >
+<ion-content scrollY="false">
+  <ion-card>
     <ion-card-header>
       <div class="row">
-      <div class="column" (click)="seeProfile(post.author)">
-        <div class="profile">
-          <ion-avatar >
-            <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
-            <ng-template #placeholder_avatar>
-              <div class="fallback">
-                <img class="profileIcon"src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
-                <p class="profileIcontext"></p>
-              </div>
-            </ng-template>
-          </ion-avatar>
-          <ion-card-title>{{ user(post) }}</ion-card-title>
-          <ion-card-subtitle>{{ type(post) }}  <ng-container *ngIf="post.positive==False"></ng-container> </ion-card-subtitle>
+        <div class="column" (click)="seeProfile(post.author)">
+          <div class="profile">
+            <ion-avatar>
+              <ion-img *ngIf="hasimage(post); else placeholder_avatar;" [src]="profilePicture"></ion-img>
+              <ng-template #placeholder_avatar>
+                <div class="fallback">
+                  <img class="profileIcon"
+                    src="https://t3.ftcdn.net/jpg/03/72/38/88/360_F_372388834_bUf3QEyES2fkPj0D7g0ZBMng2DuSgld7.jpg">
+                  <p class="profileIcontext"></p>
+                </div>
+              </ng-template>
+            </ion-avatar>
+            <ion-card-title>{{ user(post) }}</ion-card-title>
+            <ion-card-subtitle>{{ type(post) }} <ng-container *ngIf="post.positive==False"></ng-container>
+            </ion-card-subtitle>
+          </div>
+          <ng-container *ngIf="post.positive==true">
+            <ion-chip color="success">
+              <ion-label>Recomendado</ion-label>
+            </ion-chip>
+          </ng-container>
+          <ng-container *ngIf="post.positive==false">
+            <ion-chip color="danger">
+              <ion-label>No Recomendado</ion-label>
+            </ion-chip>
+          </ng-container>
         </div>
-        <ng-container *ngIf="post.positive==true">
-          <ion-chip color="success">
-            <ion-label>Recomendado</ion-label>
-          </ion-chip>
-        </ng-container>
-        <ng-container *ngIf="post.positive==false">
-          <ion-chip color="danger">
-            <ion-label>No Recomendado</ion-label>
-          </ion-chip>
-        </ng-container>
+        <div class="dropdown" *ngIf="post.author==auth.currentUser.uid">
+          <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
+          <div class="dropdown-content">
+            <a (click)="deleteConfirmation(post)">Eliminar</a>
+            <a (click)="updatePost(post.id)">Editar</a>
+          </div>
+        </div>
       </div>
-      <div class="dropdown"  *ngIf="post.author==auth.currentUser.uid" > 
-        <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
-        <div class="dropdown-content">
-          <a (click)="deleteConfirmation(post)">Eliminar</a>
-          <a (click)="updatePost(post.id)">Editar</a>
-        </div>
-      </div>   
-    </div>
     </ion-card-header>
-  
+
     <ion-card-content>
       <ion-col class="imgs">
         <ion-slides pager="true" loop="true">
-          <ng-container *ngFor="let item of post.images;">
-            <ion-slide >
+          <ng-container *ngFor="let item of  .images;">
+            <ion-slide>
               <img src="{{item}}">
             </ion-slide>
           </ng-container>
         </ion-slides>
-    </ion-col>
-    <div class="text">
-      <p class="title">{{ post.title }}</p>
-      <p class="subtitle">{{ postText(post.text) }} </p>
-    </div>
+      </ion-col>
+      <div class="text">
+        <p class="title">{{ post.title }}</p>
+        <p class="subtitle">{{ postText(post.text) }} </p>
+      </div>
     </ion-card-content>
   </ion-card>
+  <ion-content>
+    <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappeable (click)="drawer.toggleDrawer()">
+    </div>
+    <drawer-comments (openStateChanged)=" toggleBackdrop($event)" #drawer>
+    </drawer-comments>
+  </ion-content>
+  <!-- <ion-fab vertical="bottom" horizontal="end" (click)="drawer.toggleDrawer()">
+    <ion-fab-button color="warning">
+      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 </ion-content>

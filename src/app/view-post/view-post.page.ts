@@ -21,6 +21,8 @@ export class ViewPostPage implements OnInit {
   profiles= [];
   profilePicture = null;
   username = null;
+  backdropVisible = false;
+  
   constructor(private dataService: DataService,private route: ActivatedRoute,private firestore: Firestore,
     private alertController: AlertController,private loadingController:LoadingController, private auth: Auth,
     private router:Router) {
@@ -153,7 +155,10 @@ export class ViewPostPage implements OnInit {
       await alert.present();
     }
     
-    
+    toggleBackdrop(isVisible){
+      this.backdropVisible = isVisible;
+    }
+
     async Done(header,message) {
       const alert = await this.alertController.create({
         header,
