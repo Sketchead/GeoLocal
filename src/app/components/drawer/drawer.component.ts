@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter, AfterViewInit } from '@angular/core';
 import { GestureController, Platform } from '@ionic/angular';
 import { Auth } from '@angular/fire/auth';
-import { Firestore,getDoc,doc } from '@angular/fire/firestore';
+import { Firestore,getDoc,doc,collection } from '@angular/fire/firestore';
 import { CommentsService } from 'src/app/services/comments.service';
 import { Comments } from 'src/app/services/comments.service';
 import { LoadingController } from '@ionic/angular';
@@ -11,11 +11,6 @@ import { Router } from '@angular/router';
   selector: 'drawer-comments',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
-  // template:`
-  // <div>Se pasó el
-  //   <ng-content></ng-content>
-  // </div>
-  // `,
 })
 export class DrawerComponent implements AfterViewInit {
   @ViewChild('drawer', { read: ElementRef }) drawer: ElementRef;
@@ -23,18 +18,20 @@ export class DrawerComponent implements AfterViewInit {
   
   isOpen = false;
   openHeight = 0;
-  //username = null;
-  //userType  = null;
   comment:string;
   date = new Date();
   postID ="";
   userLogged? = null;
   comm : Comments;
   comments : Comments[];
+  id : string;
   constructor(private plt: Platform, 
     private gestureCtrl: GestureController,
     private auth:Auth,
-    private firestore: Firestore, private commentsService:CommentsService, private loadingController:LoadingController, private router:Router) {
+    private firestore: Firestore,
+    private commentsService:CommentsService, 
+    private loadingController:LoadingController, 
+    private router:Router,) {
       this.commentsService.getComment().subscribe(comments =>{
         this.comments =comments;
         console.log("Comentarios: "+comments);
@@ -97,6 +94,36 @@ export class DrawerComponent implements AfterViewInit {
       this.commentsService.getComment().subscribe(comments =>{
         console.log();
       });
+    }
+    async deleteComment(comment){
+
+        const loading = await this.loadingController.create()
+        await loading.present()
+        
+        const response = await this.commentsService.deleteComment(comment);
+        console.log(response);
+        
+        await loading.dismiss()
+
+        await this.commentsService.getComment().subscribe(comments =>{
+          this.comments =comments;
+          //console.log("Comentarios: "+comments);
+        });
+    }
+
+    async updateComment(comment:Comments){
+          this.comm={
+            comment:this.comment,
+            date: this.date,
+            user:this.userLogged,
+            postID:this.getId()
+          }
+          const response = await this.commentsService.updateComment(this.comm);
+
+          await this.commentsService.getComment().subscribe(comments =>{
+            this.comments =comments;
+            //console.log("Comentarios: "+comments);
+          });
     }
 
     seePost(id: string){
