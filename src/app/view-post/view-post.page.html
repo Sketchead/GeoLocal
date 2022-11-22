@@ -43,7 +43,7 @@
             </ion-chip>
           </ng-container>
         </div>
-        <div class="dropdown" *ngIf="post.author==auth.currentUser.uid">
+        <div class="dropdown" *ngIf="post.author==userLogged">
           <ion-icon class="options" name="ellipsis-vertical-outline" class="dropbtn"></ion-icon>
           <div class="dropdown-content">
             <a (click)="deleteConfirmation(post)">Eliminar</a>
@@ -72,7 +72,7 @@
   <ion-content>
     <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappeable (click)="drawer.toggleDrawer()">
     </div>
-    <drawer-comments (openStateChanged)=" toggleBackdrop($event)" #drawer>
+    <drawer-comments (openStateChanged)=" toggleBackdrop($event,post.id)" #drawer>
     </drawer-comments>
   </ion-content>
 </ion-content>

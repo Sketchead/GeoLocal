@@ -4,14 +4,23 @@
       <div class="drawer-pull"></div>
     </ion-button>
   </div>
+  <ion-content>
+    <ion-card-header>
+      <ion-item class="comments">
+        <ion-input id="comment" name="comment" [(ngModel)]="comment" placeholder="Da tu reseña">
+        </ion-input>
+        <ion-button (click)="onSubmit()" fill="clear" shape="round">
+          <ion-icon color="success" name="chatbox-ellipses-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
 
-  <ion-button color="success" expand="block" fill="clear" shape="round">Agregar nuevo comentario</ion-button>
-  <ion-list>
-    <ion-item>Test 1</ion-item>
-    <ion-item>Test 1</ion-item>
-    <ion-item>Test 1</ion-item>
-    <ion-item>Test 1</ion-item>
-    <ion-item>Test 1</ion-item>
-    <ion-item>Test 1</ion-item>
-  </ion-list>
+      <ion-card-content class="Boxcomments">
+        <ion-list no-lines>
+          <ion-item-sliding no-lines *ngFor="let item of comments; let i = index">
+            <ion-item no-lines *ngIf="item.postID == getId()">{{item.comment}}</ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-card-content>
+    </ion-card-header>
+  </ion-content>
 </div>

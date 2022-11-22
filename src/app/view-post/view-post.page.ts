@@ -8,10 +8,18 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { AuthService } from '../services/auth.service';
 import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { DrawerComponent } from '../components/drawer/drawer.component';
 @Component({
   selector: 'app-view-post',
   templateUrl: './view-post.page.html',
   styleUrls: ['./view-post.page.scss'],
+  // template: `
+  // <div>
+  //   <drawer-comments>
+  //     <label>Este es el id{{post.id}}</label>
+  //   </drawer-comments>
+  // </div>
+  // `,
 })
 export class ViewPostPage implements OnInit {
   userLogged? = null;
@@ -26,9 +34,6 @@ export class ViewPostPage implements OnInit {
   constructor(private dataService: DataService,private route: ActivatedRoute,private firestore: Firestore,
     private alertController: AlertController,private loadingController:LoadingController, private auth: Auth,
     private router:Router) {
-    }
-    
-    async ngOnInit() {
       this.route.queryParams.subscribe(async (params) => {
         //console.log(params.id);
         const docRef = doc(this.firestore,`posts/${params.id}`)
@@ -44,33 +49,31 @@ export class ViewPostPage implements OnInit {
           this.dataService.getProfiles().subscribe(res=>{
             this.profiles = res;
           })
-          const gauth = getAuth();
-          onAuthStateChanged(gauth, (user) => {
-            if (user) {
-              this.userLogged = this.auth.currentUser.uid;
-              if(this.post.author === this.auth.currentUser.uid){
-                this.isOwner=true;
-              }
-            } 
-          });
+          
         })
       });    
     }
+    
+    async ngOnInit() {
+      
+    }
+    
+    
     updatePost(id: string){
       console.log('upd click')
       this.router.navigate(['/edit-post'], {
         queryParams: { id: id  },
       });
     }
-
+    
     seeProfile(id: string){
       if(id==this.userLogged){
         this.router.navigate(['/app/profile'])
       }else{
-      this.router.navigate(['/view-profile'], {
-        queryParams: { id: id  },
-      });
-    }
+        this.router.navigate(['/view-profile'], {
+          queryParams: { id: id  },
+        });
+      }
     }
     
     postText(postText:string){
@@ -88,7 +91,7 @@ export class ViewPostPage implements OnInit {
       }
       return false
     }
-
+    
     user(post:Post){
       for(let i=0;i<this.profiles.length;i++){
         if(post.author==this.profiles[i].client.user){
@@ -98,7 +101,7 @@ export class ViewPostPage implements OnInit {
       }
       return "Prueba"
     }
-
+    
     type(post:Post){
       let type=""
       for(let i=0;i<this.profiles.length;i++){
@@ -155,10 +158,11 @@ export class ViewPostPage implements OnInit {
       await alert.present();
     }
     
-    toggleBackdrop(isVisible){
+    toggleBackdrop(isVisible,id:string){
       this.backdropVisible = isVisible;
+      return id;
     }
-
+    
     async Done(header,message) {
       const alert = await this.alertController.create({
         header,
