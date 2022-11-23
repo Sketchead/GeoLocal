@@ -14,8 +14,14 @@ export class MapPage implements OnInit {
 
   constructor(private loadingController:LoadingController) { }
 
+
+
   ngOnInit() {
   }
+
+
+
+
   ionViewDidEnter(){
     this.createMap();
   }
@@ -37,4 +43,8 @@ export class MapPage implements OnInit {
     });
     await loading.dismiss()
   }
+
+  //metodo puntos
+
+
 }
