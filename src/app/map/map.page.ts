@@ -68,6 +68,19 @@ export class MapPage implements OnInit {
       },
     ];  
     await this.map.addMarkers(markers);
+
+    //Ver coordenadas
+    /*this.map.setOnMarkerClickListener(async (marker)=>{
+      const modal = await this.modalCtrl.create({
+        component: ModalPage,
+        componentProps:{
+          marker,
+        },
+        breakpoints: [0,0.3],
+        initialBreakpoint:0.3,
+      });
+      modal.present();
+    });*/
   }
 
 
