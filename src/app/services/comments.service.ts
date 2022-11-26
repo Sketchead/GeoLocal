@@ -15,7 +15,6 @@ export interface Comments {
   providedIn: 'root'
 })
 export class CommentsService {
-
   constructor(private firestore:Firestore, private auth:Auth) { }
   
   addComment(comment:Comments){
@@ -30,15 +29,21 @@ export class CommentsService {
     const commentRef = doc(this.firestore,`comments/${comment.id}`);
     return deleteDoc(commentRef);
   }
-
-  updateComment(comment:Comments){
+  
+  async updateComment(comment:Comments){
+    const user = await this.auth.currentUser;
     console.log("prueba: "+ comment.comment);
-    
+    console.log('ID1: '+comment.id);
+    try{
       const commentDocRef = doc(this.firestore,`comments/${comment.id}`);
-       updateDoc(commentDocRef,{
-        comment
-      })
-      //console.log(e);
+      await updateDoc(commentDocRef,{
+        comment : comment.comment
+      });
+    }catch(e){
+      console.log(e);
+      return null;
+    }
+    //console.log(e);
     //}
   }
 }

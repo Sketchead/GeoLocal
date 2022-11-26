@@ -25,6 +25,9 @@ export class DrawerComponent implements AfterViewInit {
   comm : Comments;
   comments : Comments[];
   id : string;
+  buttonI = true;
+  buttonU = false;
+  auxComm : Comments;
   constructor(private plt: Platform, 
     private gestureCtrl: GestureController,
     private auth:Auth,
@@ -45,11 +48,11 @@ export class DrawerComponent implements AfterViewInit {
           this.userLogged = this.auth.currentUser.uid;
         } 
       });
-
+      
       const drawer = this.drawer.nativeElement;
       this.openHeight = (this.plt.height() / 100) * 70;
-  
-    
+      
+      
       const gesture = await this.gestureCtrl.create({
         el: drawer,
         gestureName: 'swipe',
@@ -81,7 +84,7 @@ export class DrawerComponent implements AfterViewInit {
       var id = window.location.toString().split('=')
       return id[1];
     }
-
+    
     async onSubmit(){
       this.comm={
         comment:this.comment,
@@ -91,47 +94,51 @@ export class DrawerComponent implements AfterViewInit {
       }
       const response = await this.commentsService.addComment(this.comm);
       console.log(response);
-      this.commentsService.getComment().subscribe(comments =>{
-        console.log();
-      });
+      // this.commentsService.getComment().subscribe(comments =>{
+      //   console.log();
+      // });
+      this.comment = '';
     }
     async deleteComment(comment){
-
-        const loading = await this.loadingController.create()
-        await loading.present()
-        
-        const response = await this.commentsService.deleteComment(comment);
-        console.log(response);
-        
-        await loading.dismiss()
-
-        await this.commentsService.getComment().subscribe(comments =>{
-          this.comments =comments;
-          //console.log("Comentarios: "+comments);
-        });
+      
+      const loading = await this.loadingController.create()
+      await loading.present()
+      
+      const response = await this.commentsService.deleteComment(comment);
+      console.log(response);
+      
+      await loading.dismiss()
+      
+      // await this.commentsService.getComment().subscribe(comments =>{
+      //   this.comments =comments;
+      // });
     }
-
+    boxComment(comment:Comments){
+      this.buttonU = true;
+      this.buttonI= false;
+      this.comment = comment.comment;
+      this.auxComm = comment;
+      console.log('Comentario U: '+ this.auxComm.comment);
+    }
     async updateComment(comment:Comments){
-          this.comm={
-            comment:this.comment,
-            date: this.date,
-            user:this.userLogged,
-            postID:this.getId()
-          }
-          const response = await this.commentsService.updateComment(this.comm);
-
-          await this.commentsService.getComment().subscribe(comments =>{
-            this.comments =comments;
-            //console.log("Comentarios: "+comments);
-          });
+      comment.comment = this.comment;
+      console.log('Comentario U2: '+ comment.comment);
+      const response = await this.commentsService.updateComment(comment);
+      // await this.commentsService.getComment().subscribe(comments =>{
+      //   this.comments =comments;
+      //   //console.log("Comentarios: "+comments);
+      // });
+      this.buttonU = false;
+      this.buttonI = true;
+      this.comment = '';
     }
-
+    
     seePost(id: string){
       this.router.navigate(['/view-post'], {
         queryParams: { id: id  },
       });
     }
-
+    
     toggleDrawer() {
       const drawer = this.drawer.nativeElement;
       this.openState.emit(!this.isOpen);

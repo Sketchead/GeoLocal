@@ -9,8 +9,11 @@
       <ion-item class="comments">
         <ion-input id="comment" name="comment" [(ngModel)]="comment" placeholder="Da tu reseña">
         </ion-input>
-        <ion-button (click)="onSubmit()" fill="clear" shape="round">
+        <ion-button *ngIf="buttonI" (click)="onSubmit()" fill="clear" shape="round">
           <ion-icon color="success" name="chatbox-ellipses-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="buttonU" (click)="updateComment(auxComm)" fill="clear" shape="round">
+          <ion-icon name="pencil-outline"></ion-icon>
         </ion-button>
       </ion-item>
 
@@ -27,7 +30,7 @@
                 <ion-icon name="trash-outline"></ion-icon>
               </ion-item-option>
             </ion-item-options>
-            <ion-item-options *ngIf="item.user == this.userLogged" side="start" (ionSwipe)="updateComment(item)">
+            <ion-item-options *ngIf="item.user == this.userLogged" side="start" (ionSwipe)="boxComment(item)">
               <ion-item-option expandable color="warning">
                 <ion-icon name="hammer-outline"></ion-icon>
               </ion-item-option>
