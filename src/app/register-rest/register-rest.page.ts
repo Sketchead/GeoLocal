@@ -61,3 +61,4 @@ export class RegisterRestPage implements OnInit {
       await alert.present();
     }
 }
+ 

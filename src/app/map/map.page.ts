@@ -14,6 +14,7 @@ import { AlertController } from '@ionic/angular';
 export class MapPage implements OnInit {
   @ViewChild('map')mapRef:ElementRef;
   map: GoogleMap;
+  a:string;
 
   constructor(private loadingController:LoadingController, private alert:AlertController) { }
 
@@ -101,7 +102,22 @@ export class MapPage implements OnInit {
       });
       modal.present();
     });*/
-  }
 
+    this.map.setOnMapClickListener(async (position)=>{
+      const alert = await this.alert.create({
+        header: 'Ubicaciòn',
+        message:'posicion'
+        +'Latitud: '+position.latitude+'    Longitud: '+position.longitude,
+        buttons: ['OK']
+      });  
+      await alert.present()
+      let result = await alert.onDidDismiss();
+      console.log(result);
+      this.a=position.latitude.toString();
+      console.log(this.a);
+    });
+
+  }
+ 
 
 }

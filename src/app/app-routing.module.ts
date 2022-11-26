@@ -66,6 +66,10 @@ const routes: Routes = [
   },  {
     path: 'home-guest',
     loadChildren: () => import('./home-guest/home-guest.module').then( m => m.HomeGuestPageModule)
+  },
+  {
+    path: 'ubicationr',
+    loadChildren: () => import('./ubicationr/ubicationr.module').then( m => m.UbicationrPageModule)
   }
 
 
