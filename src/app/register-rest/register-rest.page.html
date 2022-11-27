@@ -9,7 +9,7 @@
     <div id="logo">
       <ion-img src="/assets/images/Logo.png"></ion-img>
     </div>
-    <form (ngSubmit)="addres()" ngNativeValidate>
+    <form ngNativeValidate>
     <div class="formulario" >
       <div class="campo">
         <label>NOMBRE(S)</label>
@@ -21,9 +21,9 @@
       </div>
       <div class="campo">
         <label>UBICACION</label>
-        <button id="botonUbicacion">SELECCIONAR</button>
+        <button id="botonUbicacion" (click)="ubicacion()">SELECCIONAR</button>
       </div>
-      <button id="botonRegistro" type="submit" >REGISTRARSE</button>
+      <button id="botonRegistro" type="submit" (click)="addres()" >REGISTRARSE</button>
     </div>
   </form>
   </div>

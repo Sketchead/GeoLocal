@@ -6,6 +6,8 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Restaurant } from '../models/restaurant';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { RestaurantService } from '../services/restaurant.service';
+import { UbicationrPage } from '../ubicationr/ubicationr.page';
+
 
 @Component({
   selector: 'app-register-rest',
@@ -17,7 +19,8 @@ export class RegisterRestPage implements OnInit {
   rest : Restaurant;
   name:string;
   resname:string;
-  
+  la:string;
+  lo:string;
   
   constructor(
     private restaurantService:RestaurantService,
@@ -41,8 +44,8 @@ export class RegisterRestPage implements OnInit {
             email: this.auth.currentUser.email,
             name:this.name, 
             username:this.resname,
-            latitude:"21.5039",
-            longitude:" -104.895",
+            latitude:this.restaurantService.latitude,
+            longitude:this.restaurantService.longitude,
             type:"restaurant" 
            }
         
@@ -60,5 +63,10 @@ export class RegisterRestPage implements OnInit {
       });
       await alert.present();
     }
+
+    ubicacion(){
+      this.router.navigateByUrl('ubicationr',{replaceUrl:true});
+    }
+
 }
  

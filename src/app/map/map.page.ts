@@ -103,7 +103,7 @@ export class MapPage implements OnInit {
       modal.present();
     });*/
 
-    this.map.setOnMapClickListener(async (position)=>{
+    /*this.map.setOnMapClickListener(async (position)=>{
       const alert = await this.alert.create({
         header: 'Ubicaciòn',
         message:'posicion'
@@ -115,7 +115,7 @@ export class MapPage implements OnInit {
       console.log(result);
       this.a=position.latitude.toString();
       console.log(this.a);
-    });
+    });*/
 
   }
  

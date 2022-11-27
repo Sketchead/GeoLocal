@@ -5,6 +5,8 @@ import { LoadingController } from '@ionic/angular';
 import { title } from 'process';
 import { environment } from 'src/environments/environment';
 import { AlertController } from '@ionic/angular';
+import { RegisterPage } from '../register/register.page';
+import { RestaurantService } from '../services/restaurant.service';
 
 
 @Component({
@@ -15,10 +17,10 @@ import { AlertController } from '@ionic/angular';
 export class UbicationrPage implements OnInit {
   @ViewChild('map')mapRef:ElementRef;
   map: GoogleMap;
-  lat:string;
-  long:String;
+  public lat:string;
+  public long:String;
 
-  constructor(private loadingController:LoadingController, private alert:AlertController) { }
+  constructor(private loadingController:LoadingController, private alert:AlertController, private res: RestaurantService) { }
 
   ngOnInit() {
   }
@@ -52,20 +54,21 @@ export class UbicationrPage implements OnInit {
     this.map.setOnMapClickListener(async (position)=>{
       const alert = await this.alert.create({
         header: 'Ubicaciòn',
-        message:'posicion'
-        +'Latitud: '+position.latitude+'    Longitud: '+position.longitude,
+        message:'Latitud: '+position.latitude+'    Longitud: '+position.longitude,
         buttons: ['OK']
       });  
       await alert.present()
       let result = await alert.onDidDismiss();
       console.log(result);
-      this.lat=position.latitude.toString();
-      this.long=position.longitude.toString();
-      console.log(this.lat);
-      console.log(this.long);
+      this.res.latitude=position.latitude.toString();
+      this.res.longitude=position.longitude.toString();
+      console.log(this.res.latitude);
+      console.log(this.res.longitude);
     });
 
   }
+  
+  
 
 } 
  
