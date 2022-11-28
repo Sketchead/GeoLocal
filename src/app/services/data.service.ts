@@ -20,6 +20,11 @@ export interface Post{
   images?: string[];
   type:string;
 }
+export interface User{
+  latitud: string;
+  longitud: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +35,11 @@ export class DataService {
   getPosts(): Observable<Post[]>{
     const postsRef = collection(this.firestore,'posts');
     return collectionData(postsRef, { idField: 'id'}) as Observable<Post[]>;
+  }
+ 
+  getUsers(): Observable<User[]>{
+    const postsRef = collection(this.firestore,'posts');
+    return collectionData(postsRef, { idField: 'id'}) as Observable<User[]>;
   }
 
   getProfiles(): Observable<Post[]>{

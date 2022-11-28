@@ -46,7 +46,7 @@ export class HomePage {
               
               console.log('Lat:', this.pos[0]);
               console.log('Lon:', this.pos[1]);
-
+ 
               var lat2 = res[index].pos[0]; 
               var lon2 = res[index].pos[1]; 
               var lat1 = this.pos[0]; 
@@ -85,7 +85,7 @@ export class HomePage {
               this.userType = await doc.data().client.type
             }else{
               this.router.navigateByUrl('/user-type',{replaceUrl:true});
-            }
+            } 
           });
         } else {
           this.router.navigateByUrl('/login',{replaceUrl:true});
