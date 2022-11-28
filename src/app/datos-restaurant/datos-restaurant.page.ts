@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
-
+ 
 @Component({
   selector: 'app-datos-restaurant',
   templateUrl: './datos-restaurant.page.html',

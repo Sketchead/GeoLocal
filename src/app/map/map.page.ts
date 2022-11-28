@@ -80,7 +80,7 @@ export class MapPage implements OnInit {
                 lat: Number(this.profiles[i].client.latitude),
                 lng: Number(this.profiles[i].client.longitude),
               },
-              title: 'Coordenadas'
+              title: 'Restaurant: '+this.profiles[i].client.username
             }
             this.markers.push(marker)
             console.log(marker)

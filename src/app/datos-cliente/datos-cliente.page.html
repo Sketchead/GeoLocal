@@ -4,12 +4,12 @@
       <ion-back-button (click)="back()"></ion-back-button>
       <ion-title>Editar perfil</ion-title>
     </div> 
-    <form (ngSubmit)="updateConfirmation()" ngNativeValidate>
+    <form  ngNativeValidate>
       <div class="formulario" *ngIf="type()=='client'">
         <div class="campo">
           <label>NOMBRE(S)</label>
           <input type="text" id="nombre" name="name" [(ngModel)]="name" required>
-        </div>
+        </div> 
         <div class="campo">
           <label>NOMBRE USUARIO</label>
           <input type="text" id="username" name="username" [(ngModel)]="username" required>
@@ -36,9 +36,9 @@
         </div>
         <div class="campo">
           <label>UBICACION</label>
-          <button id="botonUbicacion">SELECCIONAR</button> 
+          <button id="botonUbicacion" (click)="ubicacion()">SELECCIONAR</button> 
         </div>
-        <button id="botonRegistro" type="submit" >CONFIRMAR</button>
+        <button id="botonRegistro" type="submit" (click)="updateConfirmation()">CONFIRMAR</button>
       </div>
 
     </form>

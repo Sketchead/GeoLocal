@@ -48,7 +48,7 @@ export class RegisterRestPage implements OnInit {
             longitude:this.restaurantService.longitude,
             type:"restaurant" 
            }
-        
+         
       
       
         await this.restaurantService.createRes(this.rest)
@@ -66,6 +66,7 @@ export class RegisterRestPage implements OnInit {
 
     ubicacion(){
       this.router.navigateByUrl('ubicationr',{replaceUrl:true});
+      this.restaurantService.uso = 2;
     }
 
 }

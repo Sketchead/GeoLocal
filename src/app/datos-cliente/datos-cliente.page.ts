@@ -24,9 +24,9 @@ export class DatosClientePage implements OnInit {
   userLogged? = null;
   userType  = null;
   rest : Restaurant;
-  client : Client;
+  client : Client; 
   name:string
-  //client
+  //client 
   username:string
   firstLastname:string
   secondLastname:string
@@ -90,8 +90,8 @@ export class DatosClientePage implements OnInit {
             email: this.auth.currentUser.email,
             name:this.name, 
             username:this.resname,
-            latitude:"21.5039",
-            longitude:" -104.895",
+            latitude:this.restaurantService.latitude,
+            longitude:this.restaurantService.longitude,
             type:"restaurant" 
           }
           await this.restaurantService.editRes(this.rest)
@@ -140,6 +140,11 @@ export class DatosClientePage implements OnInit {
         buttons:['OK'],
       });
       await alert.present();
+    }
+
+    ubicacion(){
+      this.router.navigateByUrl('ubicationr',{replaceUrl:true});
+      this.restaurantService.uso = 1;
     }
     
   }

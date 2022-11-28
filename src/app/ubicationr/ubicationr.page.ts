@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { AlertController } from '@ionic/angular';
 import { RegisterPage } from '../register/register.page';
 import { RestaurantService } from '../services/restaurant.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,8 +20,8 @@ export class UbicationrPage implements OnInit {
   map: GoogleMap;
   public lat:string;
   public long:String;
-
-  constructor(private loadingController:LoadingController, private alert:AlertController, private res: RestaurantService) { }
+ 
+  constructor(private loadingController:LoadingController, private alert:AlertController, private res: RestaurantService, private router:Router) { }
 
   ngOnInit() {
   }
@@ -64,6 +65,11 @@ export class UbicationrPage implements OnInit {
       this.res.longitude=position.longitude.toString();
       console.log(this.res.latitude);
       console.log(this.res.longitude);
+      if(this.res.uso==1){
+        this.router.navigateByUrl('datos-cliente',{replaceUrl:true});
+      }else if(this.res.uso = 2){
+        this.router.navigateByUrl('register-rest',{replaceUrl:true});
+      }
     });
 
   }

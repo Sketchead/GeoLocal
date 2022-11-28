@@ -8,6 +8,7 @@ import { Firestore ,collectionData, collection, addDoc, setDoc, doc, updateDoc} 
 export class RestaurantService {
   latitude:string;
   longitude:string;
+  uso:number;
 
   constructor(private firestore:Firestore,
     private auth:Auth) { }
