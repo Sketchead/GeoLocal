@@ -8,6 +8,7 @@ import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
 import { Geolocation } from '@capacitor/geolocation';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 @Component({
   selector: 'app-create-publicity-post',
@@ -37,6 +38,7 @@ export class CreatePublicityPostPage implements OnInit {
       };
 
       printCurrentPosition()
+      defineCustomElements(window);
      }
 
   ngOnInit() {
@@ -59,15 +61,41 @@ export class CreatePublicityPostPage implements OnInit {
       this.editPostAddPhoto(postedId);
   }
 
-   async choosePhoto() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Photos,
+  async choosePhoto() {
+    const alert = await this.alertController.create({
+      header: 'Cargar foto desde',
+      buttons: [
+        {
+          text: 'Galería',
+          role: 'gallery',
+          handler: async() => {
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+              source: CameraSource.Photos,
+            });
+            console.log(image);
+            this.b64imx=image
+          },
+        },
+        {
+          text: 'Cámara',
+          role: 'camera',
+          handler: async() => {
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+              source: CameraSource.Camera,
+            });
+            console.log(image);
+            this.b64imx=image
+          },
+        },
+      ],
     });
-    console.log(image);
-    this.b64imx=image
+      await alert.present();
   }
 
   async editPostAddPhoto(postedId: string){

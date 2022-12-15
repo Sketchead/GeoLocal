@@ -8,6 +8,7 @@ import { Auth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { CameraSource,CameraResultType,Camera,Photo } from '@capacitor/camera'
 import { Geolocation } from '@capacitor/geolocation';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 @Component({
   selector: 'app-create-post',
@@ -39,6 +40,7 @@ export class CreatePostPage implements OnInit {
       };
 
       printCurrentPosition()
+      defineCustomElements(window);
     }
 
   ngOnInit() {
@@ -64,14 +66,41 @@ export class CreatePostPage implements OnInit {
   }
 
    async choosePhoto() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Photos,
+    const alert = await this.alertController.create({
+      header: 'Cargar foto desde',
+      buttons: [
+        {
+          text: 'Galería',
+          role: 'gallery',
+          handler: async() => {
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+              source: CameraSource.Photos,
+            });
+            console.log(image);
+            this.b64imx=image
+          },
+        },
+        {
+          text: 'Cámara',
+          role: 'camera',
+          handler: async() => {
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+              source: CameraSource.Camera,
+            });
+            console.log(image);
+            this.b64imx=image
+          },
+        },
+      ],
     });
-    console.log(image);
-    this.b64imx=image
+
+      await alert.present();
    /*  if (image){
       const loading = await this.loadingController.create();
       await loading.present();
